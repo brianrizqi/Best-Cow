@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical"
+    tools:context=".Index">
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/logo"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_below="@id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="iPou"
+        android:fontFamily="@font/font_nunitobold"
+        android:textColor="#ff8364"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff8364"
+        android:text="Version 1.0.0"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:id="@+id/version"/>
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:layout_below="@id/version"
+        android:layout_marginTop="70dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        app:SpinKit_Color="#ff8364" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:textColor="#ff8364"
+        android:layout_centerHorizontal="true"
+        android:text="Copyright PPL Agro A Kelompok E"/>
+
+
+</RelativeLayout>

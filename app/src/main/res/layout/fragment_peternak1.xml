@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".Peternak1Fragment">
+
+    <TextView
+        android:id="@+id/dateHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="9 September 2018"
+        android:textColor="#333"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:fontFamily="@font/font_nunitobold"
+        />
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/kotaHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jember dll"
+        android:textSize="20dp"
+        android:textColor="#333"/>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text="Ukuran : "/>
+        <TextView
+            android:id="@+id/ukuran1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text=" 2,0 "/>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text="Harga : "/>
+        <TextView
+            android:id="@+id/harga1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text=" 17.400 "/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text="Ukuran : "/>
+        <TextView
+            android:id="@+id/ukuran2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text=" 2,0 "/>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text="Harga : "/>
+        <TextView
+            android:id="@+id/harga2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+            android:textSize="15dp"
+            android:text=" 17.400 "/>
+    </LinearLayout>
+
+</LinearLayout>
