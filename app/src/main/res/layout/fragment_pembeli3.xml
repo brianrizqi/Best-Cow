@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:orientation="vertical"
+    tools:context=".Pembeli3Fragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#ff8364">
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_marginTop="20dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/circle"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/userProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgProfile"
+            android:text="iPou"
+            android:textColor="#fff"
+            android:fontFamily="@font/font_nunitobold"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/emailProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userProfile"
+            android:text="iPou"
+            android:textColor="#fff"
+            android:fontFamily="@font/roboto"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:text="Edit Prodile                                                                  >"
+        android:fontFamily="@font/roboto"/>
+    <Button
+        android:layout_marginTop="120dp"
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/orange_button"
+        android:fontFamily="@font/font_nunitobold"
+        android:text="Logout"
+        android:textColor="#FFF" />
+</LinearLayout>

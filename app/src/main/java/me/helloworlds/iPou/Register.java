@@ -24,11 +24,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
-    private EditText txtName, txtEmail, txtUsername, txtPassword;
+    private EditText txtName, txtEmail, txtUsername, txtPassword, txtAlamat;
     private Button regis;
-    private String name, email, username, password,level;
+    private String name, email, username, password, level, alamat;
     private RadioGroup radioGroup;
-    private RadioButton radioMitra,radioPembeli;
+    private RadioButton radioMitra, radioPembeli;
     private String regisUrl = BaseAPI.registerURL;
     private ProgressDialog dialog;
 
@@ -38,6 +38,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         txtName = (EditText) findViewById(R.id.nameRegis);
         txtEmail = (EditText) findViewById(R.id.emailRegis);
+        txtAlamat = (EditText) findViewById(R.id.alamatRegis);
         txtUsername = (EditText) findViewById(R.id.userRegis);
         txtPassword = (EditText) findViewById(R.id.passRegis);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -57,58 +58,67 @@ public class Register extends AppCompatActivity {
         email = txtEmail.getText().toString().trim();
         username = txtUsername.getText().toString().trim();
         password = txtPassword.getText().toString().trim();
+        alamat = txtAlamat.getText().toString().trim();
         int selectedId = radioGroup.getCheckedRadioButtonId();
-        if (selectedId == radioMitra.getId()){
+        if (selectedId == radioMitra.getId()) {
             level = "2";
-        } else if (selectedId == radioPembeli.getId()){
+        } else if (selectedId == radioPembeli.getId()) {
             level = "3";
         }
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("Tunggu ya :)");
-        dialog.show();
+        if (name.equalsIgnoreCase("") || email.equalsIgnoreCase("")
+                || username.equalsIgnoreCase("") || password.equalsIgnoreCase("")
+                || alamat.equalsIgnoreCase("")) {
+            Toast.makeText(this, "Mohon di isi", Toast.LENGTH_SHORT).show();
+        } else {
+            dialog = new ProgressDialog(this);
+            dialog.setMessage("Tunggu ya :)");
+            dialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, regisUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean status = jsonObject.getBoolean("status");
-                            if (status) {
-                                Toast.makeText(Register.this, "Register Success", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(Register.this,Login.class);
-                                startActivity(i);
-                                finish();
-                            } else {
-                                String errorMsg = jsonObject.getString("error_msg");
-                                Toast.makeText(Register.this, errorMsg, Toast.LENGTH_SHORT).show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, regisUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean status = jsonObject.getBoolean("status");
+                                if (status) {
+                                    Toast.makeText(Register.this, "Register Success", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(Register.this, Login.class);
+                                    startActivity(i);
+                                    finish();
+                                } else {
+                                    String errorMsg = jsonObject.getString("error_msg");
+                                    Toast.makeText(Register.this, errorMsg, Toast.LENGTH_SHORT).show();
+                                    hideDialog();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 hideDialog();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            hideDialog();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Register.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map <String,String> map = new HashMap<String, String>();
-                map.put("name",name);
-                map.put("email",email);
-                map.put("username",username);
-                map.put("password",password);
-                map.put("level",level);
-                return map;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest);
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(Register.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("name", name);
+                    map.put("email", email);
+                    map.put("username", username);
+                    map.put("password", password);
+                    map.put("alamat",alamat);
+                    map.put("level", level);
+                    return map;
+                }
+            };
+            AppController.getInstance().addToRequestQueue(stringRequest);
+        }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

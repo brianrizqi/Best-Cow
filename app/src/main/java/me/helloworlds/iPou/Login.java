@@ -23,7 +23,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     private Button regis, login;
     private EditText txtUsername, txtPassword;
-    private String username, password, name, email, level, idUser;
+    private String username, password, name, email, level, idUser,alamat,ipay;
     private String loginUrl = BaseAPI.loginURL;
 
     @Override
@@ -52,57 +52,65 @@ public class Login extends AppCompatActivity {
     private void userLogin() {
         username = txtUsername.getText().toString().trim();
         password = txtPassword.getText().toString().trim();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean error = jsonObject.getBoolean("error");
-                            if (!error) {
-                                idUser = jsonObject.getString("id_user");
-                                name = jsonObject.getString("name");
-                                email = jsonObject.getString("email");
-                                level = jsonObject.getString("level");
-                                Toast.makeText(Login.this, name, Toast.LENGTH_SHORT).show();
-                                if (level.equalsIgnoreCase("1")) {
-                                    Intent i = new Intent(Login.this, Peternak.class);
-                                    startActivity(i);
-                                    finish();
-                                } else if (level.equalsIgnoreCase("2")) {
-                                    Intent i = new Intent(Login.this, Mitra.class);
-                                    i.putExtra("name", name);
-                                    i.putExtra("email", email);
-                                    startActivity(i);
-                                    finish();
-                                } else if (level.equalsIgnoreCase("3")) {
-                                    Intent i = new Intent(Login.this, Pembeli.class);
-                                    i.putExtra("name", name);
-                                    i.putExtra("email", email);
-                                    startActivity(i);
-                                    finish();
+        if (username.equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
+            Toast.makeText(this, "Mohon di isi", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean error = jsonObject.getBoolean("error");
+                                if (!error) {
+                                    idUser = jsonObject.getString("id_user");
+                                    name = jsonObject.getString("name");
+                                    email = jsonObject.getString("username");
+                                    alamat = jsonObject.getString("alamat");
+                                    level = jsonObject.getString("level");
+                                    ipay = jsonObject.getString("i_pay");
+                                    Toast.makeText(Login.this, name, Toast.LENGTH_SHORT).show();
+                                    if (level.equalsIgnoreCase("1")) {
+                                        Intent i = new Intent(Login.this, Peternak.class);
+                                        startActivity(i);
+                                        finish();
+                                    } else if (level.equalsIgnoreCase("2")) {
+                                        Intent i = new Intent(Login.this, Mitra.class);
+                                        i.putExtra("name", name);
+                                        i.putExtra("email", email);
+                                        i.putExtra("ipay",ipay);
+                                        startActivity(i);
+                                        finish();
+                                    } else if (level.equalsIgnoreCase("3")) {
+                                        Intent i = new Intent(Login.this, Pembeli.class);
+                                        i.putExtra("id", idUser);
+                                        i.putExtra("name", name);
+                                        i.putExtra("username", email);
+                                        i.putExtra("alamat", alamat);
+                                        startActivity(i);
+                                        finish();
+                                    }
                                 }
+                            } catch (JSONException e) {
+                                Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Login.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("username", username);
-                map.put("password", password);
-                return map;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest);
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(Login.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("username", username);
+                    map.put("password", password);
+                    return map;
+                }
+            };
+            AppController.getInstance().addToRequestQueue(stringRequest);
+        }
     }
 }

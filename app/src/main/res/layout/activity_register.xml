@@ -9,105 +9,135 @@
     android:padding="10dp"
     tools:context=".Register">
 
-    <android.support.design.widget.TextInputLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColorHint="#ff8364">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/nameRegis"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ff8364"
-            android:drawableLeft="@drawable/ic_person_outline_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="Name" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColorHint="#ff8364">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:textColorHint="#ff8364">
 
-        <EditText
-            android:id="@+id/emailRegis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ff8364"
-            android:drawableLeft="@drawable/ic_person_outline_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
-    </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/nameRegis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ff8364"
+                    android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Name" />
+            </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColorHint="#ff8364">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:textColorHint="#ff8364">
 
-        <EditText
-            android:id="@+id/userRegis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ff8364"
-            android:drawableLeft="@drawable/ic_person_outline_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="Username" />
-    </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/emailRegis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ff8364"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress" />
+            </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColorHint="#ff8364"
-        app:passwordToggleEnabled="true">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:textColorHint="#ff8364">
 
-        <EditText
-            android:id="@+id/passRegis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ff8364"
-            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/ic_lock_outline_black_24dp"
-            android:hint="Password"
-            android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/alamatRegis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ff8364"
+                    android:drawableLeft="@drawable/ic_home_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Alamat"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/radioMitra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mitra"/>
-        <RadioButton
-            android:id="@+id/radioPembeli"
-            android:layout_gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pembeli"/>
-    </RadioGroup>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:textColorHint="#ff8364">
 
-    <Button
-        android:id="@+id/btnRegis"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/orange_button"
-        android:fontFamily="@font/font_nunitoextra"
-        android:text="Sign Up"
-        android:textColor="#fff" />
+                <EditText
+                    android:id="@+id/userRegis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ff8364"
+                    android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Username" />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColorHint="#ff8364"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/passRegis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ff8364"
+                    android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_lock_outline_black_24dp"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/radioMitra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mitra" />
+
+                <RadioButton
+                    android:id="@+id/radioPembeli"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="Pembeli" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnRegis"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/orange_button"
+                android:fontFamily="@font/font_nunitoextra"
+                android:text="Sign Up"
+                android:textColor="#fff" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
