@@ -23,7 +23,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     private Button regis, login;
     private EditText txtUsername, txtPassword;
-    private String username, password, name, email, level, idUser,alamat,ipay;
+    private String username, password, name, email, level, idUser, alamat;
     private String loginUrl = BaseAPI.loginURL;
 
     @Override
@@ -68,7 +68,6 @@ public class Login extends AppCompatActivity {
                                     email = jsonObject.getString("username");
                                     alamat = jsonObject.getString("alamat");
                                     level = jsonObject.getString("level");
-                                    ipay = jsonObject.getString("i_pay");
                                     Toast.makeText(Login.this, name, Toast.LENGTH_SHORT).show();
                                     if (level.equalsIgnoreCase("1")) {
                                         Intent i = new Intent(Login.this, Peternak.class);
@@ -76,14 +75,15 @@ public class Login extends AppCompatActivity {
                                         finish();
                                     } else if (level.equalsIgnoreCase("2")) {
                                         Intent i = new Intent(Login.this, Mitra.class);
+                                        i.putExtra("id_user", idUser);
                                         i.putExtra("name", name);
-                                        i.putExtra("email", email);
-                                        i.putExtra("ipay",ipay);
+                                        i.putExtra("username", email);
+                                        i.putExtra("alamat", alamat);
                                         startActivity(i);
                                         finish();
                                     } else if (level.equalsIgnoreCase("3")) {
                                         Intent i = new Intent(Login.this, Pembeli.class);
-                                        i.putExtra("id", idUser);
+                                        i.putExtra("id_user", idUser);
                                         i.putExtra("name", name);
                                         i.putExtra("username", email);
                                         i.putExtra("alamat", alamat);

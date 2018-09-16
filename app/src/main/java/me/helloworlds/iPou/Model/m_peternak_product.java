@@ -1,0 +1,44 @@
+package me.helloworlds.iPou.Model;
+
+public class m_peternak_product {
+    private String id,img,harga,stok;
+
+    public m_peternak_product(String id, String img, String harga, String stok) {
+        this.id = id;
+        this.img = img;
+        this.harga = harga;
+        this.stok = stok;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
+    }
+
+    public String getStok() {
+        return stok;
+    }
+
+    public void setStok(String stok) {
+        this.stok = stok;
+    }
+}

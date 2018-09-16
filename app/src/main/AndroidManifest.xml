@@ -24,7 +24,9 @@
         <activity android:name=".Register" />
         <activity android:name=".Peternak" />
         <activity android:name=".Pembeli" />
-        <activity android:name=".Mitra"></activity>
+        <activity android:name=".Mitra" />
+        <activity android:name=".MitraDetailInvest" />
+        <activity android:name=".PeternakDetailInvest"></activity>
     </application>
 
 </manifest>

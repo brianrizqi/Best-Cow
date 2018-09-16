@@ -8,11 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,15 +30,14 @@ import me.helloworlds.iPou.Model.m_mitra_invest;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Mitra2Fragment extends Fragment {
+public class Peternak6Fragment extends Fragment {
     private ListView listView;
     private List<m_mitra_invest> list;
     private MitraInvestAdapter adapter;
     private String get_kandangUrl = BaseAPI.tampilKandangURL;
-    private String get_investorUrl = BaseAPI.tampilTotalInvestorURL;
     private String idKandang,idUser,user;
 
-    public Mitra2Fragment() {
+    public Peternak6Fragment() {
         // Required empty public constructor
     }
 
@@ -50,22 +45,19 @@ public class Mitra2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mitra2, container, false);
-        listView = (ListView) view.findViewById(R.id.listInvestMitra);
+        View view = inflater.inflate(R.layout.fragment_peternak6, container, false);
+        listView = (ListView) view.findViewById(R.id.listInvestPeternak);
         list = new ArrayList<>();
         adapter = new MitraInvestAdapter(getActivity(), list);
         listView.setAdapter(adapter);
-        user = getArguments().getString("name");
-        idUser = getArguments().getString("id_user");
         getKandang();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m_mitra_invest m = list.get(position);
-                Intent i = new Intent(getActivity(),MitraDetailInvest.class);
+                Intent i = new Intent(getActivity(),PeternakDetailInvest.class);
                 i.putExtra("id_kandang",m.getId());
                 i.putExtra("kandang",m.getKandang());
-                i.putExtra("id_user",idUser);
                 startActivity(i);
             }
         });

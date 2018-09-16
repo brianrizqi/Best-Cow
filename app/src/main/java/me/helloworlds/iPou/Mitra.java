@@ -28,9 +28,12 @@ public class Mitra extends AppCompatActivity {
                     break;
                 case R.id.navigation_investation:
                     fragment = invest;
+                    data.putString("id_user", id);
+                    data.putString("name", nama);
                     if (fragment == null) {
                         invest = new Mitra2Fragment();
                         fragment = invest;
+                        invest.setArguments(data);
                     }
                     break;
                 case R.id.navigation_schedule:
@@ -42,7 +45,7 @@ public class Mitra extends AppCompatActivity {
                     break;
                 case R.id.navigation_other:
                     fragment = other;
-                    data.putString("id",id);
+                    data.putString("id_user",id);
                     data.putString("name",nama);
                     data.putString("username",email);
                     data.putString("alamat",alamat);
@@ -71,7 +74,7 @@ public class Mitra extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment, mitra1Fragment);
         fragmentTransaction.commit();
 
-        id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id_user");
         nama = getIntent().getStringExtra("name");
         email = getIntent().getStringExtra("username");
         alamat = getIntent().getStringExtra("alamat");

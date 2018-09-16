@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/font_nunitobold"
+        android:maxLines="2"
+        android:text="Nama"
+        android:textColor="#ff8364"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnVerif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/orange_button"
+        android:fontFamily="@font/font_nunitobold"
+        android:text="verif"
+        android:textColor="#fff" />
+
+
+</RelativeLayout>
