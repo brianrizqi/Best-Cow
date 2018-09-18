@@ -13,4 +13,6 @@ public class BaseAPI {
     public static final String tambahInvestURL = baseURL + "invest.php?apicall=create_invest";
     public static final String tampilTotalInvestorURL = baseURL + "invest.php?apicall=get_total_investor";
     public static final String tampilInvestorURL = baseURL + "invest.php?apicall=get_investor_by_id";
+    public static final String verifInvestURL = baseURL + "invest.php?apicall=verif_invest";
+    public static final String tampilJumlahUangURL = baseURL + "invest.php?apicall=get_jumlah_uang";
 }

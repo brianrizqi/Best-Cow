@@ -34,7 +34,7 @@ public class Peternak6Fragment extends Fragment {
     private ListView listView;
     private List<m_mitra_invest> list;
     private MitraInvestAdapter adapter;
-    private String get_kandangUrl = BaseAPI.tampilKandangURL;
+    private String get_investorUrl = BaseAPI.tampilTotalInvestorURL;
     private String idKandang,idUser,user;
 
     public Peternak6Fragment() {
@@ -65,19 +65,23 @@ public class Peternak6Fragment extends Fragment {
     }
 
     private void getKandang() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, get_kandangUrl,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, get_investorUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
-                            for (int i = 0; i < jsonArray.length(); i++) {
+                            for (int i = 0; i < 12; i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
                                 final m_mitra_invest m = new m_mitra_invest();
                                 m.setId(object.getString("id_kandang"));
-                                m.setKandang(object.getString("kandang"));
-                                m.setInvestor("0");
+                                m.setKandang(String.valueOf(i + 1));
+                                if (object.getString("count(*)").equalsIgnoreCase("null")) {
+                                    m.setInvestor("0");
+                                } else {
+                                    m.setInvestor(object.getString("count(*)"));
+                                }
                                 list.add(m);
                             }
                         } catch (JSONException e) {

@@ -24,11 +24,16 @@ import java.util.Map;
 
 public class MitraDetailInvest extends AppCompatActivity {
     private Button plus, minus, invest;
-    private TextView txtKandang, txtInvestPrice, txtInvestTotal;
+    private TextView txtKandang, txtInvestPrice, txtInvestTotal, txtROI;
     private CheckBox check;
-    private String kandang, idUser, idKandang;
+    private String kandang, idUser, idKandang, investor;
     private String tambahInvestUrl = BaseAPI.tambahInvestURL;
+    private String tampilJumlahUangUrl = BaseAPI.tampilJumlahUangURL;
     private int price, total, jumlah_uang;
+    private double hargaMin, hargaMax, rasioMin, rasioMax;
+    private double modal = 36300;
+    private double labaMin = 16200;
+    private double labaMax = 26700;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class MitraDetailInvest extends AppCompatActivity {
         txtKandang = (TextView) findViewById(R.id.txtKandang);
         txtInvestPrice = (TextView) findViewById(R.id.txtInvestPrice);
         txtInvestTotal = (TextView) findViewById(R.id.txtInvestTotal);
+        txtROI = (TextView) findViewById(R.id.txtROI);
         plus = (Button) findViewById(R.id.btnPlus);
         minus = (Button) findViewById(R.id.btnMinus);
         invest = (Button) findViewById(R.id.btnInvest);
@@ -46,28 +52,30 @@ public class MitraDetailInvest extends AppCompatActivity {
         kandang = getIntent().getStringExtra("kandang");
         idUser = getIntent().getStringExtra("id_user");
         idKandang = getIntent().getStringExtra("id_kandang");
+        investor = getIntent().getStringExtra("count(*)");
+        Toast.makeText(this, investor, Toast.LENGTH_SHORT).show();
+//        if (Integer.parseInt(investor) < 7) {
+//            invest.setEnabled(true);
+//        } else {
+//            invest.setEnabled(false);
+//        }
+        getJumlahUang();
         txtKandang.setText("Kandang " + kandang);
         price = Integer.parseInt(txtInvestPrice.getText().toString());
         total = Integer.parseInt(txtInvestTotal.getText().toString());
-//        txtInvestPrice.setText(format.format(Double.parseDouble(String.valueOf(total))));
+        getTotal(total);
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 total++;
-                txtInvestTotal.setText(String.valueOf(total));
-                jumlah_uang = total * price;
-//                txtInvestPrice.setText(format.format(Double.parseDouble(String.valueOf(jumlah_uang))));
-                txtInvestPrice.setText(String.valueOf(jumlah_uang));
+                getTotal(total);
             }
         });
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 total--;
-                txtInvestTotal.setText(String.valueOf(total));
-                jumlah_uang = total * price;
-//                txtInvestPrice.setText(format.format(Double.parseDouble(String.valueOf(jumlah_uang))));
-                txtInvestPrice.setText(String.valueOf(jumlah_uang));
+                getTotal(total);
             }
         });
         invest.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +88,19 @@ public class MitraDetailInvest extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void getTotal(int total){
+        txtInvestTotal.setText(String.valueOf(total));
+        jumlah_uang = total * price;
+//                txtInvestPrice.setText(format.format(Double.parseDouble(String.valueOf(jumlah_uang))));
+        txtInvestPrice.setText(String.valueOf(jumlah_uang));
+        rasioMin = (labaMin / modal) * 100;
+        rasioMax = (labaMax / modal) * 100;
+        hargaMin = (rasioMin / 100) * jumlah_uang;
+        hargaMax = (rasioMax / 100) * jumlah_uang;
+        txtROI.setText("ROI : " + String.valueOf(rasioMin) + "% - " + String.valueOf(rasioMax) + "% \n" +
+                "Untung : Rp." + String.valueOf(hargaMin) + " - Rp." + String.valueOf(hargaMax));
     }
 
     private void createInvest() {
@@ -113,6 +134,43 @@ public class MitraDetailInvest extends AppCompatActivity {
                 map.put("id_user", idUser);
                 map.put("id_kandang", idKandang);
                 map.put("jumlah_uang", jml);
+                return map;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+
+    private void getJumlahUang() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, tampilJumlahUangUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean error = jsonObject.getBoolean("error");
+                            if (!error){
+                                String jmluang = jsonObject.getString("sum(jumlah_uang)");
+                                if (Integer.parseInt(jmluang) > 108900000){
+                                    invest.setEnabled(false);
+                                } else {
+                                    invest.setEnabled(true);
+                                }
+                            }
+                        } catch (JSONException e){
+                            Toast.makeText(MitraDetailInvest.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MitraDetailInvest.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map <String,String> map = new HashMap<String,String>();
+                map.put("id_kandang",idKandang);
                 return map;
             }
         };

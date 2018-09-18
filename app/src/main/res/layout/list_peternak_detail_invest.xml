@@ -18,6 +18,12 @@
         android:textColor="#ff8364"
         android:textSize="20dp" />
 
+    <TextView
+        android:id="@+id/txtIdInvest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <Button
         android:id="@+id/btnVerif"
         android:layout_width="wrap_content"

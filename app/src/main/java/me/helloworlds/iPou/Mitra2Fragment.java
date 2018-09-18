@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,7 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.helloworlds.iPou.Adapter.MitraInvestAdapter;
 import me.helloworlds.iPou.Model.m_mitra_invest;
@@ -40,7 +43,7 @@ public class Mitra2Fragment extends Fragment {
     private MitraInvestAdapter adapter;
     private String get_kandangUrl = BaseAPI.tampilKandangURL;
     private String get_investorUrl = BaseAPI.tampilTotalInvestorURL;
-    private String idKandang,idUser,user;
+    private String idKandang, idUser, user;
 
     public Mitra2Fragment() {
         // Required empty public constructor
@@ -62,10 +65,11 @@ public class Mitra2Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m_mitra_invest m = list.get(position);
-                Intent i = new Intent(getActivity(),MitraDetailInvest.class);
-                i.putExtra("id_kandang",m.getId());
-                i.putExtra("kandang",m.getKandang());
-                i.putExtra("id_user",idUser);
+                Intent i = new Intent(getActivity(), MitraDetailInvest.class);
+                i.putExtra("id_kandang", m.getId());
+                i.putExtra("kandang", m.getKandang());
+                i.putExtra("id_user", idUser);
+                i.putExtra("count(*)",m.getInvestor());
                 startActivity(i);
             }
         });
@@ -73,19 +77,23 @@ public class Mitra2Fragment extends Fragment {
     }
 
     private void getKandang() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, get_kandangUrl,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, get_investorUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
-                            for (int i = 0; i < jsonArray.length(); i++) {
+                            for (int i = 0; i < 12; i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
                                 final m_mitra_invest m = new m_mitra_invest();
                                 m.setId(object.getString("id_kandang"));
-                                m.setKandang(object.getString("kandang"));
-                                m.setInvestor("0");
+                                m.setKandang(String.valueOf(i + 1));
+                                if (object.getString("count(*)").equalsIgnoreCase("null")) {
+                                    m.setInvestor("0");
+                                } else {
+                                    m.setInvestor(object.getString("count(*)"));
+                                }
                                 list.add(m);
                             }
                         } catch (JSONException e) {

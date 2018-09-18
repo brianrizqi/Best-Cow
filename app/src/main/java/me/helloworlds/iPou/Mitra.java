@@ -8,10 +8,16 @@ import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 public class Mitra extends AppCompatActivity {
     RelativeLayout fragment;
     android.support.v4.app.Fragment home, invest, schedule ,other;
     String id,nama,email,alamat,ipay;
+    private String HargaAyamUrl = BaseAPI.hargaayamURL;
 
     private BottomNavigationView.OnNavigationItemSelectedListener listener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

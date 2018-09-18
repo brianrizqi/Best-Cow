@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".Mitra1Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="1. Investor yang telah terdaftar sebagai mitra iPou harus menaati syarat dan ketentuan yang berlaku
 
-</FrameLayout>
+2. Dalam satu kandang terdapat 3000 ekor ayam, minimal investasi 500 ekor ayam sejumlah Rp. 18.150.000,- dan berlaku maksimal kelipatan enam tiap periode panen
+
+3. Jumlah tersebut meliputi biaya bibit, pakan, vaksin ayam, dan segala biaya yang timbul dari pekerjaan lapangan dan koordinasi dibebankan kepada investor
+
+4. Setiap investor memperoleh keuntungan dari hasil panen penjualan ayam tiap periode
+
+5. Sebagai produk investasi, investasi memiliki risiko.Namun dengan pemeliharaan yang baik diharapakan hasilnya memuaskan
+
+Jika di kemudian hari ada suatu hal yang tidak diharapkan atau terjadi kerugian maka ditanggung bersama semua investor dalam satu kadang tersebut."
+        android:textColor="#000" />
+
+</LinearLayout>

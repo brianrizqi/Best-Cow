@@ -1,7 +1,9 @@
 package me.helloworlds.iPou;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ public class Peternak2Fragment extends Fragment {
     private ListView listView;
     private PeternakScheduleAdapter adapter;
     private List<m_peternak_schedule> list = new ArrayList<>();
+    private FloatingActionButton fab;
 
     public Peternak2Fragment() {
         // Required empty public constructor
@@ -33,9 +36,17 @@ public class Peternak2Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_peternak2, container, false);
         listView = (ListView) view.findViewById(R.id.listSchedulePeternak);
-        list.add(new m_peternak_schedule("1","Kandang 1","Ayam mati : 1","Ayam Sakit : 2"));
-        adapter = new PeternakScheduleAdapter(getActivity(),list);
+        list.add(new m_peternak_schedule("1", "Kandang 1", "Ayam mati : 1", "Ayam Sakit : 2"));
+        adapter = new PeternakScheduleAdapter(getActivity(), list);
         listView.setAdapter(adapter);
+        fab = (FloatingActionButton) view.findViewById(R.id.fabSchedule);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),PeternakAddSchedule.class);
+                startActivity(i);
+            }
+        });
         return view;
     }
 
