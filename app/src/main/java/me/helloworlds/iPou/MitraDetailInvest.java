@@ -149,8 +149,9 @@ public class MitraDetailInvest extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean error = jsonObject.getBoolean("error");
                             if (!error){
-                                String jmluang = jsonObject.getString("sum(jumlah_uang)");
-                                if (Integer.parseInt(jmluang) > 108900000){
+                                int jmluang = jsonObject.getInt("sum(jumlah_uang)");
+                                Toast.makeText(MitraDetailInvest.this, String.valueOf(jmluang), Toast.LENGTH_SHORT).show();
+                                if (jmluang > 108900000){
                                     invest.setEnabled(false);
                                 } else {
                                     invest.setEnabled(true);

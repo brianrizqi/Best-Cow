@@ -7,13 +7,48 @@
     android:orientation="vertical"
     tools:context=".Peternak5Fragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#ff8364">
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle" />
+
+        <TextView
+            android:id="@+id/userProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgProfile"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/font_nunitobold"
+            android:text="Admin"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:fontFamily="@font/roboto"
+        android:text="Edit Prodile                                                                  >" />
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
         android:background="@drawable/orange_button"
         android:fontFamily="@font/font_nunitobold"
-        android:text="logout"
-        android:textColor="#fff" />
+        android:text="Logout"
+        android:textColor="#FFF" />
 
 </LinearLayout>

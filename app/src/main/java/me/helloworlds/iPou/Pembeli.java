@@ -34,7 +34,7 @@ public class Pembeli extends AppCompatActivity {
                     }
                     break;
                 case R.id.navigation_other:
-                    data.putString("id",id);
+                    data.putString("id_user",id);
                     data.putString("name",nama);
                     data.putString("username",email);
                     data.putString("alamat",alamat);
@@ -63,7 +63,7 @@ public class Pembeli extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment, pembeli1Fragment);
         fragmentTransaction.commit();
 
-        id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id_user");
         nama = getIntent().getStringExtra("name");
         email = getIntent().getStringExtra("username");
         alamat = getIntent().getStringExtra("alamat");

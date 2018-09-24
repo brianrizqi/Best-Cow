@@ -15,9 +15,9 @@ import android.widget.TextView;
  * A simple {@link Fragment} subclass.
  */
 public class Mitra4Fragment extends Fragment {
-    private Button logout;
+    private Button logout,editProfile;
     private TextView txtUser,txtIpay;
-    private String user,ipay;
+    private String user,ipay,id;
 
     public Mitra4Fragment() {
         // Required empty public constructor
@@ -30,10 +30,20 @@ public class Mitra4Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mitra4, container, false);
         txtIpay = (TextView) view.findViewById(R.id.iPayProfile);
         txtUser = (TextView) view.findViewById(R.id.userProfile);
+        editProfile = (Button) view.findViewById(R.id.btnEditProfile);
         user = getArguments().getString("name");
         ipay = getArguments().getString("ipay");
+        id = getArguments().getString("id_user");
         txtUser.setText(user);
         txtIpay.setText("Rp."+ipay);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),PembeliEditProfile.class);
+                i.putExtra("id_user",id);
+                startActivity(i);
+            }
+        });
         logout = (Button) view.findViewById(R.id.btnLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

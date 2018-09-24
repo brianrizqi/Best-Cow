@@ -14,7 +14,7 @@ import android.widget.Button;
  * A simple {@link Fragment} subclass.
  */
 public class Peternak5Fragment extends Fragment {
-    private Button logout;
+    private Button logout,editProfile;
 
     public Peternak5Fragment() {
         // Required empty public constructor
@@ -25,6 +25,15 @@ public class Peternak5Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_peternak5, container, false);
+        editProfile = (Button) view.findViewById(R.id.btnEditProfile);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),PembeliEditProfile.class);
+                i.putExtra("id_user","1");
+                startActivity(i);
+            }
+        });
         logout = (Button) view.findViewById(R.id.btnLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

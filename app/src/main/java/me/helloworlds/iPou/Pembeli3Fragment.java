@@ -17,9 +17,9 @@ import org.w3c.dom.Text;
  * A simple {@link Fragment} subclass.
  */
 public class Pembeli3Fragment extends Fragment {
-    private Button logout;
+    private Button logout,editProfile;
     private TextView txtUser,txtEmail;
-    private String user,email;
+    private String user,email,id;
 
     public Pembeli3Fragment() {
         // Required empty public constructor
@@ -32,10 +32,20 @@ public class Pembeli3Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pembeli3, container, false);
         txtEmail = (TextView) view.findViewById(R.id.emailProfile);
         txtUser = (TextView) view.findViewById(R.id.userProfile);
+        editProfile = (Button) view.findViewById(R.id.btnEditProfile);
         user = getArguments().getString("name");
         email = getArguments().getString("username");
+        id = getArguments().getString("id_user");
         txtUser.setText(user);
         txtEmail.setText("@"+email);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),PembeliEditProfile.class);
+                i.putExtra("id_user",id);
+                startActivity(i);
+            }
+        });
         logout = (Button) view.findViewById(R.id.btnLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

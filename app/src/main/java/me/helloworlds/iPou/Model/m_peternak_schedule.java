@@ -3,11 +3,7 @@ package me.helloworlds.iPou.Model;
 public class m_peternak_schedule {
     String id, kandang, ayammati, ayamsakit;
 
-    public m_peternak_schedule(String id, String kandang, String ayammati, String ayamsakit) {
-        this.id = id;
-        this.kandang = kandang;
-        this.ayammati = ayammati;
-        this.ayamsakit = ayamsakit;
+    public m_peternak_schedule() {
     }
 
     public String getId() {

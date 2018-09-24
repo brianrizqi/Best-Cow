@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".PeternakAddSchedule">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtKandang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_nunitobold"
+        android:text="Kandang"
+        android:textAlignment="center"
+        android:textColor="#ff8364"
+        android:textSize="25dp" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/editKet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ket" />
+
+    <Button
+        android:id="@+id/btnAddSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/orange_button"
+        android:fontFamily="@font/font_nunitobold"
+        android:text="tambah"
+        android:textColor="#fff" />
+
+</LinearLayout>
