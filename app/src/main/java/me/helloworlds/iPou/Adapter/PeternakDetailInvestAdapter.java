@@ -1,6 +1,7 @@
 package me.helloworlds.iPou.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ import java.util.Map;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.Model.m_peternak_detail_invest;
+import me.helloworlds.iPou.Peternak;
+import me.helloworlds.iPou.PeternakDetailInvest;
 import me.helloworlds.iPou.R;
 
 public class PeternakDetailInvestAdapter extends RecyclerView.Adapter<PeternakDetailInvestAdapter.ViewHolder> {
@@ -87,7 +90,8 @@ public class PeternakDetailInvestAdapter extends RecyclerView.Adapter<PeternakDe
                             boolean status = jsonObject.getBoolean("status");
                             if (status) {
                                 Toast.makeText(context, "Invest telah diverifikasi", Toast.LENGTH_SHORT).show();
-
+                                Intent i = new Intent(context,Peternak.class);
+                                context.startActivity(i);
                             } else {
                                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                             }

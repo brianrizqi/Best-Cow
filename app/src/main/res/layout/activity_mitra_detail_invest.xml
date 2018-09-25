@@ -61,9 +61,14 @@
     <TextView
         android:id="@+id/txtROI"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:textSize="15dp"
         android:text=""/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:text="Perhitungan di atas hanya sebuah simulasi berdasarkan parameter aktual. simulasi ini bukan suatu jaminan bahwa hasil yang didapat akan sama persis dengan perhitungan. Keuntungan didapat dari penjualan komoditas saat panen. Keuntungan bisa lebih kecil atau lebih besar dari simulasi ini"
+        android:textColor="#333"/>
     <CheckBox
         android:id="@+id/checkInvest"
         android:layout_width="match_parent"

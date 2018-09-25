@@ -4,7 +4,7 @@ package me.helloworlds.iPou;
 //192.168.43.157 hp
 //10.133.1.154
 public class BaseAPI {
-    public static final String baseURL = "http://192.168.1.106/iPou/";
+    public static final String baseURL = "http://10.132.1.78/iPou/";
     public static final String registerURL = baseURL + "register.php";
     public static final String loginURL = baseURL + "login.php";
     public static final String hargaURL = baseURL + "harga.php";

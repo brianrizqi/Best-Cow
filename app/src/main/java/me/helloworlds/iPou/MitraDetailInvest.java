@@ -1,5 +1,6 @@
 package me.helloworlds.iPou;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,12 +54,12 @@ public class MitraDetailInvest extends AppCompatActivity {
         idUser = getIntent().getStringExtra("id_user");
         idKandang = getIntent().getStringExtra("id_kandang");
         investor = getIntent().getStringExtra("count(*)");
-        Toast.makeText(this, investor, Toast.LENGTH_SHORT).show();
 //        if (Integer.parseInt(investor) < 7) {
 //            invest.setEnabled(true);
 //        } else {
 //            invest.setEnabled(false);
 //        }
+        invest.setEnabled(true);
         getJumlahUang();
         txtKandang.setText("Kandang " + kandang);
         price = Integer.parseInt(txtInvestPrice.getText().toString());
@@ -90,7 +91,7 @@ public class MitraDetailInvest extends AppCompatActivity {
         });
     }
 
-    private void getTotal(int total){
+    private void getTotal(int total) {
         txtInvestTotal.setText(String.valueOf(total));
         jumlah_uang = total * price;
 //                txtInvestPrice.setText(format.format(Double.parseDouble(String.valueOf(jumlah_uang))));
@@ -104,8 +105,8 @@ public class MitraDetailInvest extends AppCompatActivity {
     }
 
     private void createInvest() {
-        final String jml = txtInvestPrice.getText().toString();
-
+        final String jml = txtInvestPrice.getText().toString().trim();
+        Toast.makeText(this, jml, Toast.LENGTH_SHORT).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, tambahInvestUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -115,7 +116,8 @@ public class MitraDetailInvest extends AppCompatActivity {
                             boolean status = jsonObject.getBoolean("status");
                             if (status) {
                                 Toast.makeText(MitraDetailInvest.this, "Terima Kasih telah investasi", Toast.LENGTH_SHORT).show();
-                                onBackPressed();
+                                Intent i = new Intent(MitraDetailInvest.this,MitraRekInvest.class);
+                                startActivity(i);
                             }
                         } catch (JSONException e) {
                             Toast.makeText(MitraDetailInvest.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -132,7 +134,7 @@ public class MitraDetailInvest extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("id_user", idUser);
-                map.put("id_kandang", idKandang);
+                map.put("id_kandang", kandang);
                 map.put("jumlah_uang", jml);
                 return map;
             }
@@ -145,19 +147,17 @@ public class MitraDetailInvest extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean error = jsonObject.getBoolean("error");
-                            if (!error){
+                            if (!error) {
                                 int jmluang = jsonObject.getInt("sum(jumlah_uang)");
                                 Toast.makeText(MitraDetailInvest.this, String.valueOf(jmluang), Toast.LENGTH_SHORT).show();
-                                if (jmluang > 108900000){
+                                if (jmluang > 108900000) {
                                     invest.setEnabled(false);
-                                } else {
-                                    invest.setEnabled(true);
                                 }
                             }
-                        } catch (JSONException e){
+                        } catch (JSONException e) {
                             Toast.makeText(MitraDetailInvest.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -167,11 +167,11 @@ public class MitraDetailInvest extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MitraDetailInvest.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }){
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map <String,String> map = new HashMap<String,String>();
-                map.put("id_kandang",idKandang);
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("id_kandang", idKandang);
                 return map;
             }
         };

@@ -90,6 +90,8 @@ public class Login extends AppCompatActivity {
                                         startActivity(i);
                                         finish();
                                     }
+                                } else {
+                                    Toast.makeText(Login.this, jsonObject.getString("error_msg"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();

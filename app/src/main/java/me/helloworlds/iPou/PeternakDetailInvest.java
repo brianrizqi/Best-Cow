@@ -29,13 +29,14 @@ public class PeternakDetailInvest extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private List<m_peternak_detail_invest> list = new ArrayList<m_peternak_detail_invest>();
     private String tampilInvestorUrl = BaseAPI.tampilInvestorURL;
-    private String idKandang;
+    private String idKandang,kandang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peternak_detail_invest);
         idKandang = getIntent().getStringExtra("id_kandang");
+        kandang = getIntent().getStringExtra("kandang");
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -77,7 +78,7 @@ public class PeternakDetailInvest extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("id_kandang", idKandang);
+                map.put("id_kandang", kandang);
                 return map;
             }
         };

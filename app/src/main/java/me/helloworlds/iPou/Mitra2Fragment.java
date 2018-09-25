@@ -70,6 +70,8 @@ public class Mitra2Fragment extends Fragment {
                 i.putExtra("kandang", m.getKandang());
                 i.putExtra("id_user", idUser);
                 i.putExtra("count(*)",m.getInvestor());
+                Toast.makeText(getActivity(), m.getKandang(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), idUser, Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
         });
@@ -84,11 +86,15 @@ public class Mitra2Fragment extends Fragment {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
-                            for (int i = 0; i < 12; i++) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
                                 final m_mitra_invest m = new m_mitra_invest();
                                 m.setId(object.getString("id_kandang"));
-                                m.setKandang(String.valueOf(i + 1));
+                                if (object.getString("id_kandang").equalsIgnoreCase("null")){
+                                    m.setKandang(String.valueOf(i+1));
+                                } else {
+                                    m.setKandang(object.getString("id_kandang"));
+                                }
                                 if (object.getString("count(*)").equalsIgnoreCase("null")) {
                                     m.setInvestor("0");
                                 } else {
