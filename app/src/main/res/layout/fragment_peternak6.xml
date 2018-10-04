@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context=".Peternak6Fragment">
+    tools:context=".Peternak.Peternak6Fragment">
 
     <ListView
         android:id="@+id/listInvestPeternak"

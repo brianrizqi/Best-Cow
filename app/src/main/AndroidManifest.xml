@@ -23,17 +23,23 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".Register" />
-        <activity android:name=".Peternak" />
-        <activity android:name=".Pembeli" />
-        <activity android:name=".Mitra" />
-        <activity android:name=".MitraDetailInvest" />
-        <activity android:name=".PeternakDetailInvest" />
-        <activity android:name=".PeternakAddSchedule" />
-        <activity android:name=".PeternakDetailSchedule" />
-        <activity android:name=".PembeliEditProfile" />
-        <activity android:name=".MitraEditProfile" />
-        <activity android:name=".PeternakEditProfile" />
-        <activity android:name=".MitraRekInvest"></activity>
+        <activity android:name=".Peternak.Peternak" />
+        <activity android:name=".Pembeli.Pembeli" />
+        <activity android:name=".Mitra.Mitra" />
+        <activity android:name=".Mitra.MitraDetailInvest" />
+        <activity android:name=".Peternak.PeternakDetailInvest" />
+        <activity android:name=".Peternak.PeternakAddSchedule" />
+        <activity android:name=".Peternak.PeternakDetailSchedule" />
+        <activity android:name=".Pembeli.PembeliEditProfile" />
+        <activity android:name=".Mitra.MitraEditProfile" />
+        <activity android:name=".Peternak.PeternakEditProfile" />
+        <activity android:name=".Mitra.MitraRekInvest" />
+        <activity android:name=".Peternak.PeternakAddStatusAyam" />
+        <activity android:name=".Mitra.MitraDetailSchedule" />
+        <activity android:name=".Mitra.MitraUploadBukti" />
+        <activity android:name=".Mitra.MitraSelesaiInvestasi" />
+        <activity android:name=".Mitra.MitraStatusInvest" />
+        <activity android:name=".Peternak.PeternakVerifInvest"></activity>
     </application>
 
 </manifest>

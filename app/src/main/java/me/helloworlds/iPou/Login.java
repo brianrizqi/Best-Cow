@@ -20,10 +20,14 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.helloworlds.iPou.Mitra.Mitra;
+import me.helloworlds.iPou.Pembeli.Pembeli;
+import me.helloworlds.iPou.Peternak.Peternak;
+
 public class Login extends AppCompatActivity {
     private Button regis, login;
     private EditText txtUsername, txtPassword;
-    private String username, password, name, email, level, idUser, alamat;
+    private String username, password, name, email, level, idUser, alamat, i_pay;
     private String loginUrl = BaseAPI.loginURL;
 
     @Override
@@ -52,6 +56,7 @@ public class Login extends AppCompatActivity {
     private void userLogin() {
         username = txtUsername.getText().toString().trim();
         password = txtPassword.getText().toString().trim();
+        final TinyDB tinyDB = new TinyDB(getApplicationContext());
         if (username.equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
             Toast.makeText(this, "Mohon di isi", Toast.LENGTH_SHORT).show();
         } else {
@@ -68,21 +73,25 @@ public class Login extends AppCompatActivity {
                                     email = jsonObject.getString("username");
                                     alamat = jsonObject.getString("alamat");
                                     level = jsonObject.getString("level");
+                                    i_pay = jsonObject.getString("i_pay");
                                     Toast.makeText(Login.this, name, Toast.LENGTH_SHORT).show();
                                     if (level.equalsIgnoreCase("1")) {
                                         Intent i = new Intent(Login.this, Peternak.class);
+                                        tinyDB.putString("id_user", idUser);
                                         startActivity(i);
                                         finish();
                                     } else if (level.equalsIgnoreCase("2")) {
                                         Intent i = new Intent(Login.this, Mitra.class);
-                                        i.putExtra("id_user", idUser);
-                                        i.putExtra("name", name);
+                                        tinyDB.putString("id_user", idUser);
+                                        tinyDB.putString("name", name);
                                         i.putExtra("username", email);
                                         i.putExtra("alamat", alamat);
+                                        tinyDB.putString("i_pay", i_pay);
                                         startActivity(i);
                                         finish();
                                     } else if (level.equalsIgnoreCase("3")) {
                                         Intent i = new Intent(Login.this, Pembeli.class);
+                                        tinyDB.putString("id_user", idUser);
                                         i.putExtra("id_user", idUser);
                                         i.putExtra("name", name);
                                         i.putExtra("username", email);

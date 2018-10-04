@@ -1,13 +1,17 @@
 package me.helloworlds.iPou.Model;
 
 public class m_mitra_schedule {
-    String id,kandang,ayammati,ayamsakit;
+    String id, kandang, ayammati, ayamsakit, count;
 
-    public m_mitra_schedule(String id, String kandang, String ayammati, String ayamsakit) {
-        this.id = id;
-        this.kandang = kandang;
-        this.ayammati = ayammati;
-        this.ayamsakit = ayamsakit;
+    public m_mitra_schedule() {
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
     }
 
     public String getId() {

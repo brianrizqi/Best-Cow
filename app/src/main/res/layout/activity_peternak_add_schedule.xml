@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".PeternakAddSchedule">
+    tools:context=".Peternak.PeternakAddSchedule">
 
     <TextView
         android:id="@+id/txtKandang"

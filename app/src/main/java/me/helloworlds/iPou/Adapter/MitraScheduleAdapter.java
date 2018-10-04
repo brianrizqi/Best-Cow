@@ -43,9 +43,9 @@ public class MitraScheduleAdapter extends BaseAdapter {
         TextView txtAyamMati = (TextView) view.findViewById(R.id.txtAyamMati);
         TextView txtAyamSakit = (TextView) view.findViewById(R.id.txtAyamSakit);
 
-        txtKandang.setText(m.getKandang());
-        txtAyamMati.setText(m.getAyammati());
-        txtAyamSakit.setText(m.getAyamsakit());
+        txtKandang.setText("Kandang " + m.getKandang());
+        txtAyamMati.setText("Ayam Mati :"+m.getAyammati());
+        txtAyamSakit.setText("Ayam Sakit : "+m.getAyamsakit());
         view.setTag(m.getId());
         return view;
     }

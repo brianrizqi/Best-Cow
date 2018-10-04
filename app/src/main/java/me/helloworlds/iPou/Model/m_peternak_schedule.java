@@ -1,9 +1,25 @@
 package me.helloworlds.iPou.Model;
 
 public class m_peternak_schedule {
-    String id, kandang, ayammati, ayamsakit;
+    String id, kandang, ayammati, ayamsakit, count, jum;
 
     public m_peternak_schedule() {
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public String getJum() {
+        return jum;
+    }
+
+    public void setJum(String jum) {
+        this.jum = jum;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
     }
 
     public String getId() {

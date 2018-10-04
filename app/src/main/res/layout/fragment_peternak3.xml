@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context=".Peternak3Fragment">
+    tools:context=".Peternak.Peternak3Fragment">
 
     <ListView
         android:id="@+id/listProductPeternak"

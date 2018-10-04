@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".MitraEditProfile">
+    tools:context=".Mitra.MitraEditProfile">
 
     <ScrollView
         android:layout_width="match_parent"

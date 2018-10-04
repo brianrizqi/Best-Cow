@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".MitraDetailInvest">
+    tools:context=".Mitra.MitraDetailInvest">
 
     <TextView
         android:id="@+id/txtKandang"

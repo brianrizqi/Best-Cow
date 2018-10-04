@@ -5,35 +5,51 @@
     android:layout_height="wrap_content"
     android:background="#fff"
     android:padding="5dp">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/font_nunitobold"
-        android:maxLines="2"
-        android:text="Nama"
-        android:textColor="#ff8364"
-        android:textSize="20dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
 
-    <TextView
-        android:id="@+id/txtIdInvest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/font_nunitobold"
+                android:maxLines="2"
+                android:text="Nama"
+                android:textColor="#ff8364"
+                android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/btnVerif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/orange_button"
-        android:fontFamily="@font/font_nunitobold"
-        android:text="verif"
-        android:textColor="#fff" />
+            <TextView
+                android:id="@+id/txtIdInvest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <Button
+                android:layout_alignParentBottom="true"
+                android:id="@+id/btnVerif"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/orange_button"
+                android:fontFamily="@font/font_nunitobold"
+                android:text="Detail"
+                android:textColor="#fff" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 
 </RelativeLayout>

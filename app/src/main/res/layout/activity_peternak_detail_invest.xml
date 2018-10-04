@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context=".PeternakDetailInvest">
+    tools:context=".Peternak.PeternakDetailInvest">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleView"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context=".Peternak5Fragment">
+    tools:context=".Peternak.Peternak5Fragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -6,7 +6,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Mitra1Fragment">
+    tools:context=".Mitra.Mitra1Fragment">
 
     <TextView
         android:layout_width="match_parent"

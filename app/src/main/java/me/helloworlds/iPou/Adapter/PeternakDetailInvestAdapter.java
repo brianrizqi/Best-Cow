@@ -9,26 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.Model.m_peternak_detail_invest;
-import me.helloworlds.iPou.Peternak;
-import me.helloworlds.iPou.PeternakDetailInvest;
+import me.helloworlds.iPou.Peternak.PeternakVerifInvest;
 import me.helloworlds.iPou.R;
 
 public class PeternakDetailInvestAdapter extends RecyclerView.Adapter<PeternakDetailInvestAdapter.ViewHolder> {
@@ -57,8 +43,9 @@ public class PeternakDetailInvestAdapter extends RecyclerView.Adapter<PeternakDe
             @Override
             public void onClick(View v) {
                 String idInvest = holder.txtId.getText().toString();
-                Toast.makeText(context, holder.txtId.getText().toString(), Toast.LENGTH_SHORT).show();
-                verifInvest(idInvest);
+                Intent i = new Intent(context, PeternakVerifInvest.class);
+                i.putExtra("id_investasi", idInvest);
+                context.startActivity(i);
             }
         });
     }
@@ -80,39 +67,5 @@ public class PeternakDetailInvestAdapter extends RecyclerView.Adapter<PeternakDe
         }
     }
 
-    private void verifInvest(final String idInvest) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, verifInvestUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean status = jsonObject.getBoolean("status");
-                            if (status) {
-                                Toast.makeText(context, "Invest telah diverifikasi", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(context,Peternak.class);
-                                context.startActivity(i);
-                            } else {
-                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("id_investasi", idInvest);
-                return map;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest);
-    }
+
 }

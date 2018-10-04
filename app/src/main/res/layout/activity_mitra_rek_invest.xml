@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:background="#fff"
-    tools:context=".MitraRekInvest">
+    tools:context=".Mitra.MitraRekInvest">
 
     <ImageView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/orange_button"
-        android:text="selesai"
+        android:text="Selanjutnya"
         android:textColor="#fff"
         android:fontFamily="@font/font_nunitobold"
         android:layout_marginTop="220dp"/>

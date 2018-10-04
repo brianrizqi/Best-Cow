@@ -6,7 +6,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Peternak1Fragment">
+    tools:context=".Peternak.Peternak1Fragment">
 
     <TextView
         android:id="@+id/dateHome"
