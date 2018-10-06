@@ -39,7 +39,8 @@
         <activity android:name=".Mitra.MitraUploadBukti" />
         <activity android:name=".Mitra.MitraSelesaiInvestasi" />
         <activity android:name=".Mitra.MitraStatusInvest" />
-        <activity android:name=".Peternak.PeternakVerifInvest"></activity>
+        <activity android:name=".Peternak.PeternakVerifInvest" />
+        <activity android:name=".Peternak.PeternakEditSchedule"></activity>
     </application>
 
 </manifest>

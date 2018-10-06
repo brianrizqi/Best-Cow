@@ -1,11 +1,13 @@
 package me.helloworlds.iPou.Mitra;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -59,6 +61,15 @@ public class Mitra3Fragment extends Fragment {
         adapter = new MitraScheduleAdapter(getActivity(), list);
         listView.setAdapter(adapter);
         tampilJadwal();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                m_mitra_schedule m = list.get(position);
+                Intent i = new Intent(getActivity(),MitraDetailSchedule.class);
+                i.putExtra("id_kandang",m.getKandang());
+                startActivity(i);
+            }
+        });
         return view;
     }
 

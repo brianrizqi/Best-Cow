@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#fff"
+    tools:context=".Peternak.PeternakEditSchedule">
+    <TextView
+        android:id="@+id/txtKandang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_nunitobold"
+        android:text="Kandang"
+        android:textAlignment="center"
+        android:textColor="#ff8364"
+        android:textSize="25dp" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/editKet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ket" />
+
+    <Button
+        android:id="@+id/btnEditSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/orange_button"
+        android:fontFamily="@font/font_nunitobold"
+        android:text="update"
+        android:textColor="#fff" />
+</LinearLayout>

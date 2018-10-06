@@ -30,7 +30,7 @@ public class PeternakAddStatusAyam extends AppCompatActivity {
     private EditText txtAyamSakit, txtAyamMati;
     private String ayammati, ayamsakit, kandang;
     private String ayamMati, ayamSakit;
-    private int totalMati, totalSakit;
+    private String totalMati, totalSakit;
     private Button btnUpdateAyam;
 
     @Override
@@ -56,10 +56,8 @@ public class PeternakAddStatusAyam extends AppCompatActivity {
     private void updateAyam() {
         ayamMati = txtAyamMati.getText().toString().trim();
         ayamSakit = txtAyamSakit.getText().toString().trim();
-        totalMati = Integer.parseInt(ayammati) + Integer.parseInt(ayamMati);
-        totalSakit = Integer.parseInt(ayamsakit) + Integer.parseInt(ayamSakit);
-        if (String.valueOf(totalMati).equalsIgnoreCase("") ||
-                String.valueOf(totalSakit).equalsIgnoreCase("")) {
+        if (ayamMati.equalsIgnoreCase("") ||
+                ayamSakit.equalsIgnoreCase("")) {
             Toast.makeText(this, "yang kosong mohon diisi angka 0", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, updateAyamUrl,
@@ -90,8 +88,8 @@ public class PeternakAddStatusAyam extends AppCompatActivity {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("id_kandang", kandang);
-                    map.put("ayam_mati", String.valueOf(totalMati));
-                    map.put("ayam_sakit", String.valueOf(totalSakit));
+                    map.put("ayam_mati", ayamMati);
+                    map.put("ayam_sakit", ayamSakit);
                     return map;
                 }
             };

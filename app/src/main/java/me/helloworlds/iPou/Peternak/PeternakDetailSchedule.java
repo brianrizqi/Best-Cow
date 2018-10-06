@@ -3,6 +3,7 @@ package me.helloworlds.iPou.Peternak;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class PeternakDetailSchedule extends AppCompatActivity {
     private String tampilJadwalUrl = BaseAPI.tampilJadwalURL;
     private String hapusJadwalUrl = BaseAPI.hapusJadwalURL;
     private TextView txtFab1, txtFab2;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isOpen = false;
 
     @Override
@@ -84,6 +86,14 @@ public class PeternakDetailSchedule extends AppCompatActivity {
                 }
             });
         }
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeDetailSchedule);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getJadwal();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         fabadd.startAnimation(fabClose);
         fabket.startAnimation(fabClose);
         txtFab1.startAnimation(fabClose);
@@ -148,6 +158,7 @@ public class PeternakDetailSchedule extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(PeternakDetailSchedule.this);
         View view = getLayoutInflater().inflate(R.layout.dialog_delete, null);
         Button dialogButton = (Button) view.findViewById(R.id.nextButton);
+        Button editButton = (Button) view.findViewById(R.id.editButton);
         builder.setView(view);
         final AlertDialog dialog = builder.create();
         dialog.show();
@@ -155,6 +166,16 @@ public class PeternakDetailSchedule extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 deleteSchedule(idJadwal);
+                dialog.dismiss();
+                getJadwal();
+            }
+        });
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PeternakEditSchedule.class);
+                i.putExtra("id_jadwal", idJadwal);
+                startActivity(i);
                 dialog.dismiss();
             }
         });

@@ -4,6 +4,7 @@ package me.helloworlds.iPou.Peternak;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class Peternak2Fragment extends Fragment {
     private PeternakScheduleAdapter adapter;
     private List<m_peternak_schedule> list = new ArrayList<>();
     private String tampilStatusAyamUrl = BaseAPI.tampilStatusAyamURL;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public Peternak2Fragment() {
         // Required empty public constructor
@@ -52,6 +54,14 @@ public class Peternak2Fragment extends Fragment {
         adapter = new PeternakScheduleAdapter(getActivity(), list);
         listView.setAdapter(adapter);
         getStatusAyam();
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeSchedulePeternak);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getStatusAyam();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

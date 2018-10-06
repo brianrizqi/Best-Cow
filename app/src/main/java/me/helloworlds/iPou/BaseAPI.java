@@ -4,7 +4,7 @@ package me.helloworlds.iPou;
 //192.168.43.157 hp
 //10.133.1.154
 public class BaseAPI {
-    public static final String baseURL = "http://192.168.1.9/iPou/";
+    public static final String baseURL = "http://himasif.ilkom.unej.ac.id/iPou/";
     public static final String registerURL = baseURL + "register.php";
     public static final String loginURL = baseURL + "login.php";
     public static final String hargaURL = baseURL + "harga.php";
@@ -24,8 +24,10 @@ public class BaseAPI {
     public static final String updateAyamURL = baseURL + "schedule.php?apicall=update_ayam";
     public static final String tampilJadwalMitraURL = baseURL + "schedule.php?apicall=get_schedule_mitra";
     public static final String hapusJadwalURL = baseURL + "schedule.php?apicall=delete_schedule";
-    public static final String uploadBuktiURL = baseURL+"invest.php?apicall=upload_bukti";
-    public static final String tampilInvestorIdURL = baseURL +"invest.php?apicall=get_investor_id";
-    public static final String tampilDetailInvestURL = baseURL +"invest.php?apicall=get_invest";
-    public static final String tolakInvestURL = baseURL +"invest.php?apicall=delete_invest";
+    public static final String uploadBuktiURL = baseURL + "invest.php?apicall=upload_bukti";
+    public static final String tampilInvestorIdURL = baseURL + "invest.php?apicall=get_investor_id";
+    public static final String tampilDetailInvestURL = baseURL + "invest.php?apicall=get_invest";
+    public static final String tolakInvestURL = baseURL + "invest.php?apicall=delete_invest";
+    public static final String tampilJadwalIdURL = baseURL + "schedule.php?apicall=get_schedule_id";
+    public static final String editJadwalURL = baseURL + "schedule.php?apicall=update_schedule";
 }
