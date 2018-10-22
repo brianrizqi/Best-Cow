@@ -37,6 +37,7 @@ import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.Model.m_peternak_detail_schedule;
 import me.helloworlds.iPou.R;
+import me.helloworlds.iPou.TinyDB;
 
 public class PeternakDetailSchedule extends AppCompatActivity {
     private Toolbar toolbar;
@@ -45,20 +46,23 @@ public class PeternakDetailSchedule extends AppCompatActivity {
     private FloatingActionButton fabSchedule, fabadd, fabket;
     private Animation fabOpen, fabClose, fabClockwise, fabAnticlock;
     private PeternakDetailScheduleAdapter adapter;
-    private List<m_peternak_detail_schedule> list = new ArrayList<>();
+    private List<m_peternak_detail_schedule> list;
     private String tampilJadwalUrl = BaseAPI.tampilJadwalURL;
     private String hapusJadwalUrl = BaseAPI.hapusJadwalURL;
     private TextView txtFab1, txtFab2;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private TinyDB tinyDB;
     private boolean isOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peternak_detail_schedule);
+        tinyDB = new TinyDB(getApplicationContext());
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         kandang = getIntent().getStringExtra("id_kandang");
         listView = (ListView) findViewById(R.id.listDetailSchedulePeternak);
+        list = new ArrayList<>();
         ViewCompat.setNestedScrollingEnabled(listView, true);
         adapter = new PeternakDetailScheduleAdapter(this, list);
         listView.setAdapter(adapter);
@@ -167,14 +171,14 @@ public class PeternakDetailSchedule extends AppCompatActivity {
             public void onClick(View view) {
                 deleteSchedule(idJadwal);
                 dialog.dismiss();
-                getJadwal();
+//                getJadwal();
             }
         });
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), PeternakEditSchedule.class);
-                i.putExtra("id_jadwal", idJadwal);
+                tinyDB.putString("id_jadwal", idJadwal);
                 startActivity(i);
                 dialog.dismiss();
             }

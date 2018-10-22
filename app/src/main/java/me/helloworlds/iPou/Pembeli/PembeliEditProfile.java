@@ -22,6 +22,7 @@ import java.util.Map;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.R;
+import me.helloworlds.iPou.TinyDB;
 
 public class PembeliEditProfile extends AppCompatActivity {
     private EditText txtName, txtEmail, txtAlamat, txtUsername, txtPassword;
@@ -30,18 +31,20 @@ public class PembeliEditProfile extends AppCompatActivity {
     private Button btnEdit;
     private String getUserUrl = BaseAPI.getUserURL;
     private String updateUserUrl = BaseAPI.updateUserURL;
+    private TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pembeli_edit_profile);
+        tinyDB = new TinyDB(getApplicationContext());
         txtName = (EditText) findViewById(R.id.nameProfile);
         txtEmail = (EditText) findViewById(R.id.emailProfile);
         txtAlamat = (EditText) findViewById(R.id.alamatProfile);
         txtUsername = (EditText) findViewById(R.id.userProfile);
         txtPassword = (EditText) findViewById(R.id.passProfile);
         btnEdit = (Button) findViewById(R.id.btnUpdateProfile);
-        id = getIntent().getStringExtra("id_user");
+        id = tinyDB.getString("id_user");
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         getUser();
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +69,6 @@ public class PembeliEditProfile extends AppCompatActivity {
                                 txtEmail.setText(jsonObject.getString("email"));
                                 txtAlamat.setText(jsonObject.getString("alamat"));
                                 txtUsername.setText(jsonObject.getString("username"));
-                                txtPassword.setText(jsonObject.getString("password"));
                             } else {
                                 Toast.makeText(PembeliEditProfile.this, "error", Toast.LENGTH_SHORT).show();
                             }
@@ -98,43 +100,49 @@ public class PembeliEditProfile extends AppCompatActivity {
         username = txtUsername.getText().toString().trim();
         password = txtPassword.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, updateUserUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean status = jsonObject.getBoolean("status");
-                            if (status) {
-                                Toast.makeText(PembeliEditProfile.this, "Data berhasil diupdate", Toast.LENGTH_SHORT).show();
-                                onBackPressed();
-                                finish();
-                            } else {
-                                Toast.makeText(PembeliEditProfile.this, "error", Toast.LENGTH_SHORT).show();
+        if (name.equalsIgnoreCase("") || email.equalsIgnoreCase("") ||
+                alamat.equalsIgnoreCase("") || username.equalsIgnoreCase("") ||
+                password.equalsIgnoreCase("")) {
+            Toast.makeText(this, "Tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, updateUserUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean status = jsonObject.getBoolean("status");
+                                if (status) {
+                                    Toast.makeText(PembeliEditProfile.this, "Data berhasil diupdate", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
+                                    finish();
+                                } else {
+                                    Toast.makeText(PembeliEditProfile.this, "error", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(PembeliEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(PembeliEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PembeliEditProfile.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("id_user", id);
-                map.put("name", name);
-                map.put("email", email);
-                map.put("alamat", alamat);
-                map.put("username", username);
-                map.put("password", password);
-                return map;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest);
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(PembeliEditProfile.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("id_user", id);
+                    map.put("name", name);
+                    map.put("email", email);
+                    map.put("alamat", alamat);
+                    map.put("username", username);
+                    map.put("password", password);
+                    return map;
+                }
+            };
+            AppController.getInstance().addToRequestQueue(stringRequest);
+        }
     }
 }

@@ -32,9 +32,9 @@ public class MitraDetailInvest extends AppCompatActivity {
     private Button plus, minus, invest;
     private TextView txtKandang, txtInvestPrice, txtInvestTotal, txtROI;
     private CheckBox check;
-    private String kandang, idUser, idKandang, investor;
+    private String kandang, idUser, idKandang, investor,uang;
     private String tambahInvestUrl = BaseAPI.tambahInvestURL;
-    private String tampilJumlahUangUrl = BaseAPI.tampilJumlahUangURL;
+//    private String tampilJumlahUangUrl = BaseAPI.tampilJumlahUangURL;
     private int price, total, jumlah_uang;
     private double hargaMin, hargaMax, rasioMin, rasioMax;
     private double modal = 36300;
@@ -61,8 +61,7 @@ public class MitraDetailInvest extends AppCompatActivity {
         idUser = tinyDB.getString("id_user");
         idKandang = getIntent().getStringExtra("id_kandang");
         investor = getIntent().getStringExtra("count(*)");
-        invest.setEnabled(true);
-        getJumlahUang();
+        uang = getIntent().getStringExtra("uang");
         txtKandang.setText("Kandang " + kandang);
         price = Integer.parseInt(txtInvestPrice.getText().toString());
         total = Integer.parseInt(txtInvestTotal.getText().toString());
@@ -70,28 +69,32 @@ public class MitraDetailInvest extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total++;
-                getTotal(total);
+                if (total > 5-(Integer.parseInt(uang)/18150000)) {
+
+                } else {
+                    total++;
+                    getTotal(total);
+                }
             }
         });
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total--;
-                getTotal(total);
+                if (total < 2) {
+
+                } else {
+                    total--;
+                    getTotal(total);
+                }
             }
         });
         invest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(txtInvestTotal.getText().toString()) < 1) {
-                    Toast.makeText(MitraDetailInvest.this, "Yang bener ta", Toast.LENGTH_SHORT).show();
+                if (check.isChecked()) {
+                    createInvest();
                 } else {
-                    if (check.isChecked()) {
-                        createInvest();
-                    } else {
-                        Toast.makeText(MitraDetailInvest.this, "Mohon disetujui peraturan yang ada", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(MitraDetailInvest.this, "Mohon disetujui peraturan yang ada", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -100,7 +103,6 @@ public class MitraDetailInvest extends AppCompatActivity {
     private void getTotal(int total) {
         txtInvestTotal.setText(String.valueOf(total));
         jumlah_uang = total * price;
-//                txtInvestPrice.setText(format.format(Double.parseDouble(String.valueOf(jumlah_uang))));
         txtInvestPrice.setText(String.valueOf(jumlah_uang));
         rasioMin = (labaMin / modal) * 100;
         rasioMax = (labaMax / modal) * 100;
@@ -142,41 +144,6 @@ public class MitraDetailInvest extends AppCompatActivity {
                 map.put("id_user", idUser);
                 map.put("id_kandang", kandang);
                 map.put("jumlah_uang", jml);
-                return map;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest);
-    }
-
-    private void getJumlahUang() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tampilJumlahUangUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean error = jsonObject.getBoolean("error");
-                            if (!error) {
-                                int jmluang = jsonObject.getInt("sum(jumlah_uang)");
-                                if (jmluang > 108900000) {
-                                    invest.setEnabled(false);
-                                }
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(MitraDetailInvest.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MitraDetailInvest.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("id_kandang", idKandang);
                 return map;
             }
         };

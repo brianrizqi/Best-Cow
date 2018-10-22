@@ -63,7 +63,7 @@ public class PeternakProductAdapter extends BaseAdapter {
         TextView txtHarga = (TextView) view.findViewById(R.id.txtHarga);
         TextView txtStok = (TextView) view.findViewById(R.id.txtStok);
 
-        txtHarga.setText(format.format(Double.parseDouble(m.getHarga())));
+        txtHarga.setText("Harga : " + format.format(Double.parseDouble(m.getHarga())));
         txtStok.setText("Stok : " + m.getStok());
         imgProduct.setImageUrl(m.getImg(), imageLoader);
         view.setTag(m.getId());

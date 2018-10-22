@@ -23,21 +23,24 @@ import java.util.Map;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.R;
+import me.helloworlds.iPou.TinyDB;
 
 public class PeternakEditSchedule extends AppCompatActivity {
     private EditText txtKet;
     private TextView txtKandang;
     private Button btnedit;
     private String idJadwal, ket;
+    private TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peternak_edit_schedule);
+        tinyDB = new TinyDB(getApplicationContext());
         btnedit = (Button) findViewById(R.id.btnEditSchedule);
         txtKet = (EditText) findViewById(R.id.editKet);
         txtKandang = (TextView) findViewById(R.id.txtKandang);
-        idJadwal = getIntent().getStringExtra("id_jadwal");
+        idJadwal = tinyDB.getString("id_jadwal");
         getSchedule();
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +94,7 @@ public class PeternakEditSchedule extends AppCompatActivity {
                             boolean status = jsonObject.getBoolean("status");
                             if (status) {
                                 Toast.makeText(PeternakEditSchedule.this, "Data berhasil di update", Toast.LENGTH_SHORT).show();
+                                tinyDB.remove("id_jadwal");
                                 onBackPressed();
                                 finish();
                             }

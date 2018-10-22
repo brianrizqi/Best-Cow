@@ -38,7 +38,6 @@ public class Mitra2Fragment extends Fragment {
     private ListView listView;
     private List<m_mitra_invest> list;
     private MitraInvestAdapter adapter;
-    private String get_kandangUrl = BaseAPI.tampilKandangURL;
     private String get_investorUrl = BaseAPI.tampilTotalInvestorURL;
     private String idKandang, idUser, user;
     private TinyDB tinyDB;
@@ -64,12 +63,17 @@ public class Mitra2Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m_mitra_invest m = list.get(position);
-                Intent i = new Intent(getActivity(), MitraDetailInvest.class);
-                i.putExtra("id_kandang", m.getId());
-                i.putExtra("kandang", m.getKandang());
-                i.putExtra("id_user", idUser);
-                i.putExtra("count(*)", m.getInvestor());
-                startActivity(i);
+                if (Integer.parseInt(m.getUang()) > 90750000 || Integer.parseInt(m.getInvestor()) > 5) {
+                    Toast.makeText(getActivity(), "Investor terlalu banyak", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent i = new Intent(getActivity(), MitraDetailInvest.class);
+                    i.putExtra("id_kandang", m.getId());
+                    i.putExtra("kandang", m.getKandang());
+                    i.putExtra("id_user", idUser);
+                    i.putExtra("count(*)", m.getInvestor());
+                    i.putExtra("uang",m.getUang());
+                    startActivity(i);
+                }
             }
         });
         return view;
@@ -90,9 +94,11 @@ public class Mitra2Fragment extends Fragment {
                                     m.setId(String.valueOf(i + 1));
                                     m.setKandang(String.valueOf(i + 1));
                                     m.setInvestor("0");
+                                    m.setUang("0");
                                     for (int j = 0; j < jsonArray.length(); j++) {
                                         JSONObject object = jsonArray.getJSONObject(j);
                                         if (object.getString("id_kandang").equalsIgnoreCase(String.valueOf(i + 1))) {
+                                            m.setUang(object.getString("uang"));
                                             m.setInvestor(object.getString("count(*)"));
                                         }
                                     }
@@ -105,6 +111,7 @@ public class Mitra2Fragment extends Fragment {
                                     m.setId(object.getString("id_kandang"));
                                     m.setKandang(object.getString("kandang"));
                                     m.setInvestor("0");
+                                    m.setUang("0");
                                     list.add(m);
                                 }
                             }

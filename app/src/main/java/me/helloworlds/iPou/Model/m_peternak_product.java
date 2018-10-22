@@ -1,13 +1,9 @@
 package me.helloworlds.iPou.Model;
 
 public class m_peternak_product {
-    private String id,img,harga,stok;
+    private String id, img, harga, stok;
 
-    public m_peternak_product(String id, String img, String harga, String stok) {
-        this.id = id;
-        this.img = img;
-        this.harga = harga;
-        this.stok = stok;
+    public m_peternak_product() {
     }
 
     public String getId() {

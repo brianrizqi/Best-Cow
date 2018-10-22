@@ -1,9 +1,17 @@
 package me.helloworlds.iPou.Model;
 
 public class m_mitra_invest {
-    String id, kandang, investor;
+    String id, kandang, investor, uang;
 
     public m_mitra_invest() {
+    }
+
+    public String getUang() {
+        return uang;
+    }
+
+    public void setUang(String uang) {
+        this.uang = uang;
     }
 
     public String getInvestor() {

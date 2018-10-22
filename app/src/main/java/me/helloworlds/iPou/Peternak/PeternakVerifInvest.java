@@ -25,19 +25,22 @@ import java.util.Map;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.R;
+import me.helloworlds.iPou.TinyDB;
 
 public class PeternakVerifInvest extends AppCompatActivity {
     private String idInvest;
     private TextView txtName, txtJumlah, txtKandang;
     private Button tolak, verif;
     private NetworkImageView imgBukti;
+    private TinyDB tinyDB;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peternak_verif_invest);
-        idInvest = getIntent().getStringExtra("id_investasi");
+        tinyDB = new TinyDB(getApplicationContext());
+        idInvest = tinyDB.getString("id_investasi");
         txtName = (TextView) findViewById(R.id.txtName);
         txtJumlah = (TextView) findViewById(R.id.txtJumlah);
         txtKandang = (TextView) findViewById(R.id.txtKandang);
@@ -69,6 +72,7 @@ public class PeternakVerifInvest extends AppCompatActivity {
                             boolean status = jsonObject.getBoolean("status");
                             if (status) {
                                 Toast.makeText(PeternakVerifInvest.this, "Data telah ditolak", Toast.LENGTH_SHORT).show();
+                                tinyDB.remove("id_investasi");
                                 Intent i = new Intent(getApplicationContext(), Peternak.class);
                                 startActivity(i);
                             }
@@ -139,6 +143,7 @@ public class PeternakVerifInvest extends AppCompatActivity {
                             if (status) {
                                 Toast.makeText(getApplicationContext(), "Invest telah diverifikasi", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(getApplicationContext(), Peternak.class);
+                                tinyDB.remove("id_investasi");
                                 startActivity(i);
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();

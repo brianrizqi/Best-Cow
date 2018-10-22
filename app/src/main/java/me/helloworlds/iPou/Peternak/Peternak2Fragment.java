@@ -120,7 +120,7 @@ public class Peternak2Fragment extends Fragment {
                                 }
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "aa", Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -128,7 +128,7 @@ public class Peternak2Fragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "bb", Toast.LENGTH_SHORT).show();
                     }
                 });
         AppController.getInstance().addToRequestQueue(stringRequest);

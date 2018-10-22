@@ -1,27 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".Mitra.Mitra1Fragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="1. Investor yang telah terdaftar sebagai mitra iPou harus menaati syarat dan ketentuan yang berlaku
+        android:layout_height="match_parent">
 
-2. Dalam satu kandang terdapat 3000 ekor ayam, minimal investasi 500 ekor ayam sejumlah Rp. 18.150.000,- dan berlaku maksimal kelipatan enam tiap periode panen
+        <LinearLayout
+            android:padding="10dp"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-3. Jumlah tersebut meliputi biaya bibit, pakan, vaksin ayam, dan segala biaya yang timbul dari pekerjaan lapangan dan koordinasi dibebankan kepada investor
 
-4. Setiap investor memperoleh keuntungan dari hasil panen penjualan ayam tiap periode
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
-5. Sebagai produk investasi, investasi memiliki risiko.Namun dengan pemeliharaan yang baik diharapakan hasilnya memuaskan
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
-Jika di kemudian hari ada suatu hal yang tidak diharapkan atau terjadi kerugian maka ditanggung bersama semua investor dalam satu kadang tersebut."
-        android:textColor="#000" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="Syarat dan Ketentuan Investasi"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="#ff8364"
+                        android:textSize="17dp" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_roboto"
+                        android:text="1. Investor yang telah terdaftar sebagai mitra iPou harus menaati syarat dan ketentuan yang berlaku"
+                        android:textColor="#333" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_roboto"
+                        android:text="2. Dalam satu kandang terdapat 3000 ekor ayam, minimal investasi 500 ekor ayam sejumlah Rp. 18.150.000,- dan berlaku maksimal kelipatan enam tiap periode panen"
+                        android:textColor="#333" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_roboto"
+                        android:text="3. Jumlah tersebut meliputi biaya bibit, pakan, vaksin ayam, dan segala biaya yang timbul dari pekerjaan lapangan dan koordinasi dibebankan kepada investor"
+                        android:textColor="#333" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_roboto"
+                        android:text="4. Setiap investor memperoleh keuntungan dari hasil panen penjualan ayam tiap periode"
+                        android:textColor="#333" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_roboto"
+                        android:text="5. Sebagai produk investasi, investasi memiliki risiko.Namun dengan pemeliharaan yang baik diharapakan hasilnya memuaskan \n\nJika di kemudian hari ada suatu hal yang tidak diharapkan atau terjadi kerugian maka ditanggung bersama semua investor dalam satu kadang tersebut."
+                        android:textColor="#333" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

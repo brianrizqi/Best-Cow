@@ -32,10 +32,8 @@ import me.helloworlds.iPou.R;
  * A simple {@link Fragment} subclass.
  */
 public class Peternak1Fragment extends Fragment {
-    private TextView txtDate, txtKota, txtUkuran1, txtUkuran2, txtHarga2, txtHarga1, txtHargaSkrg, txtHargaKmrn, txtSatuan;
-    private String date, kota, ukuran1, ukuran2, harga1, harga2;
+    private TextView txtDate, txtHargaSkrg, txtHargaKmrn, txtSatuan;
     private String satuan, hargakemarin, hargasekarang;
-    private String HargaUrl = BaseAPI.hargaURL;
     private String HargaAyamUrl = BaseAPI.hargaayamURL;
 
     public Peternak1Fragment() {
@@ -48,58 +46,12 @@ public class Peternak1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_peternak1, container, false);
         txtDate = (TextView) view.findViewById(R.id.dateHome);
-        txtKota = (TextView) view.findViewById(R.id.kotaHome);
-        txtUkuran1 = (TextView) view.findViewById(R.id.ukuran1);
-        txtUkuran2 = (TextView) view.findViewById(R.id.ukuran2);
-        txtHarga1 = (TextView) view.findViewById(R.id.harga1);
-        txtHarga2 = (TextView) view.findViewById(R.id.harga2);
         txtSatuan = (TextView) view.findViewById(R.id.satuan);
         txtHargaSkrg = (TextView) view.findViewById(R.id.hargasekarang);
         txtHargaKmrn = (TextView) view.findViewById(R.id.hargakemarin);
+        txtDate.setText(getTanggal());
 //        getHargaPasar();
-//        getHarga();
         return view;
-    }
-
-    private void getHarga() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HargaUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean error = jsonObject.getBoolean("error");
-                            if (!error) {
-                                kota = jsonObject.getString("kota").toString();
-                                ukuran1 = "Ukuran : < 2,0";
-                                ukuran2 = "Ukuran : > 2,0";
-                                harga1 = jsonObject.getString("harga1").toString();
-                                harga2 = jsonObject.getString("harga2").toString();
-
-                                txtDate.setText(getTanggal());
-                                txtKota.setText(kota);
-                                txtHarga1.setText("Harga : Rp."+harga1);
-                                txtHarga2.setText("Harga : Rp."+harga2);
-                                txtUkuran1.setText(ukuran1);
-                                txtUkuran2.setText(ukuran2);
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-        ));
-        AppController.getInstance().addToRequestQueue(stringRequest);
     }
 
     private void getHargaPasar() {
@@ -115,9 +67,9 @@ public class Peternak1Fragment extends Fragment {
                                 hargakemarin = jsonObject.getString("hargakemarin").toString();
                                 hargasekarang = jsonObject.getString("hargasekarang").toString();
 
-                                txtSatuan.setText("Satuan : "+satuan);
-                                txtHargaKmrn.setText("Harga Kemarin : Rp."+hargakemarin);
-                                txtHargaSkrg.setText("Harga Sekarang : Rp."+hargasekarang);
+                                txtSatuan.setText("Satuan : " + satuan);
+                                txtHargaKmrn.setText("Harga Kemarin : Rp." + hargakemarin);
+                                txtHargaSkrg.setText("Harga Sekarang : Rp." + hargasekarang);
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
