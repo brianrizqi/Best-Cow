@@ -22,9 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/nunito_bold"
         android:text="Harga Pasar"
         android:textAlignment="center"
-        android:textColor="#333"
+        android:textColor="#ff8364"
         android:textSize="25dp" />
 
     <TextView
@@ -56,6 +57,24 @@
 
     <TextView
         android:id="@+id/hargasekarang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=" 17.400 "
+        android:textColor="#333"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Peramalan"
+        android:textAlignment="center"
+        android:textColor="#ff8364"
+        android:textSize="25dp" />
+    <TextView
+        android:id="@+id/ramal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

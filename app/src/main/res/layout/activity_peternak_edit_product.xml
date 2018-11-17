@@ -1,38 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Peternak.PeternakAddProduct">
-
+    android:background="#fff"
+    tools:context=".PeternakEditProduct">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font_nunitobold"
-        android:text="TAMBAH PRODUK"
+        android:text="EDIT PRODUK"
         android:textAlignment="center"
         android:textColor="#ff8364"
         android:textSize="20dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/font_roboto"
-        android:text="Kandang"
-        android:textColor="#333"
-        android:textSize="18dp" />
-
-    <Spinner
-        android:id="@+id/spinKandang"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-    </Spinner>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -71,7 +55,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/orange_button"
         android:fontFamily="@font/font_nunitobold"
-        android:text="upload"
+        android:text="Edit"
         android:textColor="#fff" />
 
 </LinearLayout>

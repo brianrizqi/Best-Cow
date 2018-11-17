@@ -7,37 +7,20 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Peternak.PeternakAddProduct">
-
+    tools:context=".PembeliUploadBukti">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font_nunitobold"
-        android:text="TAMBAH PRODUK"
+        android:text="UPLOAD BUKTI PEMBAYARAN"
         android:textAlignment="center"
         android:textColor="#ff8364"
         android:textSize="20dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/font_roboto"
-        android:text="Kandang"
-        android:textColor="#333"
-        android:textSize="18dp" />
-
-    <Spinner
-        android:id="@+id/spinKandang"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-    </Spinner>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:padding="5dp">
 
         <TextView
@@ -59,7 +42,7 @@
             android:src="@drawable/ic_add_black_24dp" />
 
         <me.helloworlds.iPou.CustomNetworkImageView
-            android:id="@+id/imageProduct"
+            android:id="@+id/imageBukti"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
     </RelativeLayout>

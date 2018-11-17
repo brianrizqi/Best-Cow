@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".PeternakDetailOrder">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Detail Order"
+        android:textAlignment="center"
+        android:textColor="#ff8364"
+        android:textSize="25dp" />
+
+    <me.helloworlds.iPou.CustomNetworkImageView
+        android:id="@+id/imgBukti"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/txtPembeli"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Pembeli"
+        android:textColor="#333"
+        android:textSize="17.5dp" />
+
+    <TextView
+        android:id="@+id/txtJumlah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Jumlah"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/txtHarga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Total harga"
+        android:textColor="#333" />
+
+    <Button
+        android:id="@+id/btnVerif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/orange_button"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Verif"
+        android:textColor="#fff" />
+
+</LinearLayout>

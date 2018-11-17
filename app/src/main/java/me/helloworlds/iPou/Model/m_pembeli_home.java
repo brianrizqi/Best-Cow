@@ -7,13 +7,6 @@ public class m_pembeli_home {
 
     }
 
-    public m_pembeli_home(String id, String img, String harga, String stok) {
-        this.id = id;
-        this.img = img;
-        this.harga = harga;
-        this.stok = stok;
-    }
-
     public String getId() {
         return id;
     }

@@ -59,9 +59,11 @@ public class PembeliTransaksiAdapter extends BaseAdapter {
         NetworkImageView imgProduct = (NetworkImageView) view.findViewById(R.id.imgProduct);
         TextView txtJumlah = (TextView) view.findViewById(R.id.txtJumlah);
         TextView txtStatus = (TextView) view.findViewById(R.id.txtStatus);
+        TextView txtBukti = (TextView) view.findViewById(R.id.txtBukti);
 
         txtJumlah.setText(m.getJumlah());
         txtStatus.setText(m.getStatus());
+        txtBukti.setText(m.getBukti());
         imgProduct.setImageUrl(m.getImg(),imageLoader);
         view.setTag(m.getId());
         return view;

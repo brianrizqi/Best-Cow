@@ -1,4 +1,4 @@
-package me.helloworlds.iPou.Peternak;
+package me.helloworlds.iPou;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,22 +32,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.helloworlds.iPou.AppController;
-import me.helloworlds.iPou.BaseAPI;
-import me.helloworlds.iPou.CustomNetworkImageView;
-import me.helloworlds.iPou.R;
-import me.helloworlds.iPou.TinyDB;
-
-public class PeternakAddProduct extends AppCompatActivity {
-    private EditText txtHarga;
-    private Spinner spinKandang;
-    private ArrayList<String> kandangg = new ArrayList<String>();
+public class PeternakEditProduct extends AppCompatActivity {
     private ImageButton imgUpload;
     private CustomNetworkImageView imgBukti;
     private Bitmap bitmap;
-    private String harga, gambar, kandang, hargaayam;
+    private String harga, gambar, idProduct, img, qwe;
     private Button upload;
-    private NetworkImageView img;
     private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
     private TextView foto;
     private TinyDB tinyDB;
@@ -57,16 +45,16 @@ public class PeternakAddProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_peternak_add_product);
+        setContentView(R.layout.activity_peternak_edit_product);
         tinyDB = new TinyDB(getApplicationContext());
-        hargaayam = tinyDB.getString("harga_ayam");
-        Toast.makeText(this, hargaayam, Toast.LENGTH_SHORT).show();
-        spinKandang = (Spinner) findViewById(R.id.spinKandang);
-        getKandang();
+        idProduct = tinyDB.getString("id_produk");
         imgBukti = (CustomNetworkImageView) findViewById(R.id.imageProduct);
         imgUpload = (ImageButton) findViewById(R.id.imageUpload);
         foto = (TextView) findViewById(R.id.txtFoto);
-
+        getProduct();
+        Toast.makeText(this, qwe, Toast.LENGTH_SHORT).show();
+        String qwe = imgBukti.getTransitionName();
+        Toast.makeText(this, qwe, Toast.LENGTH_SHORT).show();
         imgUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,39 +68,9 @@ public class PeternakAddProduct extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upload();
+                editProduct();
             }
         });
-    }
-
-    private void getKandang() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.tampilKandangProduk,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            JSONArray jsonArray = jsonObject.getJSONArray("data");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject object = jsonArray.getJSONObject(i);
-                                kandangg.add(object.getString("id_kandang"));
-                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                                        android.R.layout.simple_spinner_item, kandangg);
-                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinKandang.setAdapter(adapter);
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(PeternakAddProduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PeternakAddProduct.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        AppController.getInstance().addToRequestQueue(stringRequest);
     }
 
     @Override
@@ -138,12 +96,49 @@ public class PeternakAddProduct extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
-    private void upload() {
+    private void getProduct() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.tampilProdukId,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject object = jsonArray.getJSONObject(i);
+                                imgBukti.setImageUrl(BaseAPI.gambarURL + object.getString("gambar"), imageLoader);
+                                img = (object.getString("harga"));
+                                Toast.makeText(PeternakEditProduct.this, img, Toast.LENGTH_SHORT).show();
+                                foto.setText("a");
+                            }
+                            String imgg = img;
+                            qwe = imgg;
+                        } catch (JSONException e) {
+                            Toast.makeText(PeternakEditProduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PeternakEditProduct.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("id_produk", idProduct);
+                return map;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+
+    private void editProduct() {
         String cek = foto.getText().toString();
         if (cek.equalsIgnoreCase(" ")) {
             gambar = imageToString(bitmap);
-            kandang = spinKandang.getSelectedItem().toString();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.tambahProduk,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.editProduk,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -151,35 +146,34 @@ public class PeternakAddProduct extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response);
                                 boolean status = jsonObject.getBoolean("status");
                                 if (status) {
-                                    Toast.makeText(PeternakAddProduct.this, "Data Berhasil di upload", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PeternakEditProduct.this, "Data Berhasil di Edit", Toast.LENGTH_SHORT).show();
                                     onBackPressed();
                                     finish();
                                 } else {
-                                    Toast.makeText(PeternakAddProduct.this, "Error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PeternakEditProduct.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
-                                Toast.makeText(PeternakAddProduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PeternakEditProduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(PeternakAddProduct.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PeternakEditProduct.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> map = new HashMap<String, String>();
-                    map.put("id_kandang", kandang);
+                    map.put("id_produk", idProduct);
                     map.put("gambar", gambar);
-                    map.put("harga", hargaayam);
                     return map;
                 }
             };
             AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
-            Toast.makeText(this, "Gambar Harus di Isi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Gambar harus diganti", Toast.LENGTH_SHORT).show();
         }
     }
 }

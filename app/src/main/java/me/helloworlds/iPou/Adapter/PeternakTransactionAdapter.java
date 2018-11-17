@@ -46,7 +46,7 @@ public class PeternakTransactionAdapter extends BaseAdapter {
 
         txtPembeli.setText("Pembeli : "+m.getPembeli());
         txtJumlah.setText("Jumlah : "+m.getJumlah());
-        txtVerif.setText("Belum Verifikasi");
+        txtVerif.setText(m.getVerif());
         view.setTag(m.getId());
         return view;
     }

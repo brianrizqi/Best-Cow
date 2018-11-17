@@ -26,15 +26,17 @@ import java.util.Date;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.R;
+import me.helloworlds.iPou.TinyDB;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Peternak1Fragment extends Fragment {
-    private TextView txtDate, txtHargaSkrg, txtHargaKmrn, txtSatuan;
-    private String satuan, hargakemarin, hargasekarang;
+    private TextView txtDate, txtHargaSkrg, txtHargaKmrn, txtSatuan,txtRamal;
+    private String satuan, hargakemarin, hargasekarang,ramal;
     private String HargaAyamUrl = BaseAPI.hargaayamURL;
+    private TinyDB tinyDB;
 
     public Peternak1Fragment() {
         // Required empty public constructor
@@ -45,12 +47,14 @@ public class Peternak1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_peternak1, container, false);
+        tinyDB = new TinyDB(getActivity());
         txtDate = (TextView) view.findViewById(R.id.dateHome);
         txtSatuan = (TextView) view.findViewById(R.id.satuan);
         txtHargaSkrg = (TextView) view.findViewById(R.id.hargasekarang);
         txtHargaKmrn = (TextView) view.findViewById(R.id.hargakemarin);
+        txtRamal = (TextView) view.findViewById(R.id.ramal);
         txtDate.setText(getTanggal());
-//        getHargaPasar();
+        getHargaPasar();
         return view;
     }
 
@@ -66,10 +70,13 @@ public class Peternak1Fragment extends Fragment {
                                 satuan = jsonObject.getString("satuan").toString();
                                 hargakemarin = jsonObject.getString("hargakemarin").toString();
                                 hargasekarang = jsonObject.getString("hargasekarang").toString();
+                                ramal = jsonObject.getString("ramal").toString();
 
                                 txtSatuan.setText("Satuan : " + satuan);
                                 txtHargaKmrn.setText("Harga Kemarin : Rp." + hargakemarin);
                                 txtHargaSkrg.setText("Harga Sekarang : Rp." + hargasekarang);
+                                txtRamal.setText("Ramalan penjualan bulan depan sebanyak : "+ramal);
+                                tinyDB.putString("harga_ayam",hargasekarang);
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -82,11 +89,6 @@ public class Peternak1Fragment extends Fragment {
                         Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-        ));
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
 

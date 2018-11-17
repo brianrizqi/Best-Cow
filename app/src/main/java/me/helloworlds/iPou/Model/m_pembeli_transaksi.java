@@ -1,17 +1,18 @@
 package me.helloworlds.iPou.Model;
 
 public class m_pembeli_transaksi {
-    private String id,jumlah,img,status;
+    private String id, jumlah, img, status, bukti;
 
-    public m_pembeli_transaksi(){
+    public m_pembeli_transaksi() {
 
     }
 
-    public m_pembeli_transaksi(String id, String jumlah, String img, String status) {
-        this.id = id;
-        this.jumlah = jumlah;
-        this.img = img;
-        this.status = status;
+    public String getBukti() {
+        return bukti;
+    }
+
+    public void setBukti(String bukti) {
+        this.bukti = bukti;
     }
 
     public String getId() {

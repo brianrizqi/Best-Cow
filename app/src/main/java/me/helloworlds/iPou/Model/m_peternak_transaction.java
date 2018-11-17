@@ -3,6 +3,10 @@ package me.helloworlds.iPou.Model;
 public class m_peternak_transaction {
     String id,pembeli,jumlah,verif;
 
+    public m_peternak_transaction(){
+
+    }
+
     public m_peternak_transaction(String id, String pembeli, String jumlah, String verif) {
         this.id = id;
         this.pembeli = pembeli;
