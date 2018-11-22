@@ -28,8 +28,8 @@ import me.helloworlds.iPou.R;
 import me.helloworlds.iPou.TinyDB;
 
 public class PeternakVerifInvest extends AppCompatActivity {
-    private String idInvest;
-    private TextView txtName, txtJumlah, txtKandang;
+    private String idInvest, gambar;
+    private TextView txtName, txtJumlah, txtKandang, cek;
     private Button tolak, verif;
     private NetworkImageView imgBukti;
     private TinyDB tinyDB;
@@ -41,11 +41,13 @@ public class PeternakVerifInvest extends AppCompatActivity {
         setContentView(R.layout.activity_peternak_verif_invest);
         tinyDB = new TinyDB(getApplicationContext());
         idInvest = tinyDB.getString("id_investasi");
+        cek = (TextView) findViewById(R.id.cek);
         txtName = (TextView) findViewById(R.id.txtName);
         txtJumlah = (TextView) findViewById(R.id.txtJumlah);
         txtKandang = (TextView) findViewById(R.id.txtKandang);
         imgBukti = (NetworkImageView) findViewById(R.id.imgBukti);
         tampil();
+        Toast.makeText(this, cek.getText().toString(), Toast.LENGTH_SHORT).show();
         tolak = (Button) findViewById(R.id.btnTolak);
         tolak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +59,12 @@ public class PeternakVerifInvest extends AppCompatActivity {
         verif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verifInvest();
+                String tcek = cek.getText().toString();
+                if (tcek.equalsIgnoreCase("a")) {
+                    Toast.makeText(PeternakVerifInvest.this, "Anda Tidak dapat melakukan verifikasi", Toast.LENGTH_SHORT).show();
+                } else {
+                    verifInvest();
+                }
             }
         });
     }
@@ -109,7 +116,13 @@ public class PeternakVerifInvest extends AppCompatActivity {
                                 txtName.setText(jsonObject.getString("name"));
                                 txtJumlah.setText("Jumlah Uang : " + jsonObject.getString("jumlah_uang"));
                                 txtKandang.setText("Kandang " + jsonObject.getString("id_kandang"));
-                                imgBukti.setImageUrl(BaseAPI.buktiURL + jsonObject.getString("img_pembayaran"), imageLoader);
+                                gambar = jsonObject.getString("img_pembayaran");
+                                if (jsonObject.getString("img_pembayaran") == "") {
+                                    cek.setText("a");
+                                } else {
+                                    imgBukti.setImageUrl(BaseAPI.buktiURL + jsonObject.getString("img_pembayaran"), imageLoader);
+                                    cek.setText("b");
+                                }
                             }
                         } catch (JSONException e) {
                             Toast.makeText(PeternakVerifInvest.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,39 +146,44 @@ public class PeternakVerifInvest extends AppCompatActivity {
     }
 
     private void verifInvest() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.verifInvestURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean status = jsonObject.getBoolean("status");
-                            if (status) {
-                                Toast.makeText(getApplicationContext(), "Invest telah diverifikasi", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(getApplicationContext(), Peternak.class);
-                                tinyDB.remove("id_investasi");
-                                startActivity(i);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+        final String tcek = cek.getText().toString();
+        if (tcek.equalsIgnoreCase("a")) {
+            Toast.makeText(this, "Anda Tidak dapat melakukan verifikasi", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.verifInvestURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean status = jsonObject.getBoolean("status");
+                                if (status) {
+                                    Toast.makeText(getApplicationContext(), "Invest telah diverifikasi", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(getApplicationContext(), Peternak.class);
+                                    tinyDB.remove("id_investasi");
+                                    startActivity(i);
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("id_investasi", idInvest);
-                return map;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest);
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("id_investasi", idInvest);
+                    return map;
+                }
+            };
+            AppController.getInstance().addToRequestQueue(stringRequest);
+        }
     }
 }

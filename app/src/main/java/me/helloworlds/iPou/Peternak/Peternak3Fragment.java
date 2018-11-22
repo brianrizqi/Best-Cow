@@ -30,7 +30,6 @@ import me.helloworlds.iPou.Adapter.PeternakProductAdapter;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.Model.m_peternak_product;
-import me.helloworlds.iPou.PeternakEditProduct;
 import me.helloworlds.iPou.R;
 import me.helloworlds.iPou.TinyDB;
 

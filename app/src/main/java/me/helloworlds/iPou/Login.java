@@ -86,7 +86,6 @@ public class Login extends AppCompatActivity {
                                         tinyDB.putString("name", name);
                                         i.putExtra("username", email);
                                         i.putExtra("alamat", alamat);
-                                        tinyDB.putString("i_pay", i_pay);
                                         startActivity(i);
                                         finish();
                                     } else if (level.equalsIgnoreCase("3")) {

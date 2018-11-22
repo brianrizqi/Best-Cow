@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".PeternakDetailOrder">
+    tools:context=".Peternak.PeternakDetailOrder">
 
     <TextView
         android:layout_width="match_parent"
@@ -48,15 +48,30 @@
         android:layout_marginTop="5dp"
         android:text="Total harga"
         android:textColor="#333" />
-
-    <Button
-        android:id="@+id/btnVerif"
+    <RelativeLayout
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/orange_button"
-        android:fontFamily="@font/nunito_bold"
-        android:text="Verif"
-        android:textColor="#fff" />
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btnTolak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#c9302c"
+            android:fontFamily="@font/font_nunitobold"
+            android:text="tolak"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/btnVerif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="#286090"
+            android:fontFamily="@font/font_nunitobold"
+            android:text="Verif"
+            android:textColor="#fff" />
+    </RelativeLayout>
 
 </LinearLayout>

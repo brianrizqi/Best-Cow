@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".PembeliDetailProduct">
+    tools:context=".Pembeli.PembeliDetailProduct">
 
     <TextView
         android:layout_width="match_parent"
@@ -48,6 +48,7 @@
         android:layout_marginTop="10dp">
 
         <EditText
+            android:inputType="number"
             android:id="@+id/jumlahBeli"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

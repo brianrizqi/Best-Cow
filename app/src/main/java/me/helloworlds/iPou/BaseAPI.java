@@ -4,7 +4,9 @@ package me.helloworlds.iPou;
 //192.168.43.157 hp
 //10.133.1.154
 public class BaseAPI {
-    public static final String baseURL = "http://192.168.1.9/iPou/";
+//    public static final String baseURL = "http://192.168.1.8/iPou/";
+//    public static final String baseURL = "http://10.212.12.133/iPou/";
+    public static final String baseURL = "http://helloworlds.me/iPou/";
     public static final String registerURL = baseURL + "register.php";
     public static final String loginURL = baseURL + "login.php";
     public static final String hargaURL = baseURL + "harga.php";
@@ -42,4 +44,5 @@ public class BaseAPI {
     public static final String tampilOrder = baseURL + "transaction.php?apicall=get_order";
     public static final String tampilDetailOrder = baseURL +"transaction.php?apicall=detail_order";
     public static final String verifOrder = baseURL + "transaction.php?apicall=verif_order";
+    public static final String hapusOrder = baseURL + "transaction.php?apicall=delete_order";
 }

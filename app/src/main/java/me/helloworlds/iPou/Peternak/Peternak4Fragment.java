@@ -27,7 +27,6 @@ import me.helloworlds.iPou.Adapter.PeternakTransactionAdapter;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.Model.m_peternak_transaction;
-import me.helloworlds.iPou.PeternakDetailOrder;
 import me.helloworlds.iPou.R;
 
 

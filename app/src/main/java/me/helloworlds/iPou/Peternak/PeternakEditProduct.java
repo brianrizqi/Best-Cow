@@ -1,8 +1,7 @@
-package me.helloworlds.iPou.Mitra;
+package me.helloworlds.iPou.Peternak;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +18,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,24 +34,29 @@ import me.helloworlds.iPou.CustomNetworkImageView;
 import me.helloworlds.iPou.R;
 import me.helloworlds.iPou.TinyDB;
 
-public class MitraUploadBukti extends AppCompatActivity {
+public class PeternakEditProduct extends AppCompatActivity {
     private ImageButton imgUpload;
     private CustomNetworkImageView imgBukti;
     private Bitmap bitmap;
-    private String idInvestasi, gambar;
+    private String harga, gambar, idProduct, img, qwe;
     private Button upload;
-    private NetworkImageView img;
     private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
     private TextView foto;
+    private TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mitra_upload_bukti);
-        idInvestasi = getIntent().getStringExtra("id_investasi");
-        imgBukti = (CustomNetworkImageView) findViewById(R.id.imageBukti);
+        setContentView(R.layout.activity_peternak_edit_product);
+        tinyDB = new TinyDB(getApplicationContext());
+        idProduct = tinyDB.getString("id_produk");
+        imgBukti = (CustomNetworkImageView) findViewById(R.id.imageProduct);
         imgUpload = (ImageButton) findViewById(R.id.imageUpload);
         foto = (TextView) findViewById(R.id.txtFoto);
+        getProduct();
+        Toast.makeText(this, qwe, Toast.LENGTH_SHORT).show();
+        String qwe = imgBukti.getTransitionName();
+        Toast.makeText(this, qwe, Toast.LENGTH_SHORT).show();
         imgUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +70,7 @@ public class MitraUploadBukti extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadBukti();
+                editProduct();
             }
         });
     }
@@ -94,11 +98,49 @@ public class MitraUploadBukti extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
-    private void uploadBukti() {
+    private void getProduct() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.tampilProdukId,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject object = jsonArray.getJSONObject(i);
+                                imgBukti.setImageUrl(BaseAPI.gambarURL + object.getString("gambar"), imageLoader);
+                                img = (object.getString("harga"));
+                                Toast.makeText(PeternakEditProduct.this, img, Toast.LENGTH_SHORT).show();
+                                foto.setText("a");
+                            }
+                            String imgg = img;
+                            qwe = imgg;
+                        } catch (JSONException e) {
+                            Toast.makeText(PeternakEditProduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PeternakEditProduct.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("id_produk", idProduct);
+                return map;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+
+    private void editProduct() {
         String cek = foto.getText().toString();
         if (cek.equalsIgnoreCase(" ")) {
             gambar = imageToString(bitmap);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.uploadBuktiURL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.editProduk,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -106,35 +148,34 @@ public class MitraUploadBukti extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response);
                                 boolean status = jsonObject.getBoolean("status");
                                 if (status) {
-                                    Toast.makeText(MitraUploadBukti.this, "Data Berhasil di upload", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(getApplicationContext(), MitraSelesaiInvestasi.class);
-                                    startActivity(i);
+                                    Toast.makeText(PeternakEditProduct.this, "Data Berhasil di Edit", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
                                     finish();
                                 } else {
-                                    Toast.makeText(MitraUploadBukti.this, "Error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PeternakEditProduct.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
-                                Toast.makeText(MitraUploadBukti.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PeternakEditProduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(MitraUploadBukti.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PeternakEditProduct.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> map = new HashMap<String, String>();
-                    map.put("id_investasi", idInvestasi);
+                    map.put("id_produk", idProduct);
                     map.put("gambar", gambar);
                     return map;
                 }
             };
             AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
-            Toast.makeText(this, "Bukti Pembayaran belum diupload", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Gambar harus diganti", Toast.LENGTH_SHORT).show();
         }
     }
 }

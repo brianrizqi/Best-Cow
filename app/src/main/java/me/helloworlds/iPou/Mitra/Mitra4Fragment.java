@@ -21,7 +21,7 @@ import me.helloworlds.iPou.TinyDB;
  */
 public class Mitra4Fragment extends Fragment {
     private Button logout, editProfile, invest;
-    private TextView txtUser, txtIpay;
+    private TextView txtUser;
     private String user, ipay, id;
     private TinyDB tinyDB;
 
@@ -35,14 +35,11 @@ public class Mitra4Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mitra4, container, false);
         tinyDB = new TinyDB(getActivity());
-        txtIpay = (TextView) view.findViewById(R.id.iPayProfile);
         txtUser = (TextView) view.findViewById(R.id.userProfile);
         editProfile = (Button) view.findViewById(R.id.btnEditProfile);
         user = tinyDB.getString("name");
-        ipay = tinyDB.getString("i_pay");
         id = tinyDB.getString("id_user");
         txtUser.setText(user);
-        txtIpay.setText("Rp." + ipay);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

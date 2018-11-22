@@ -42,10 +42,10 @@
         <activity android:name=".Peternak.PeternakVerifInvest" />
         <activity android:name=".Peternak.PeternakEditSchedule" />
         <activity android:name=".Peternak.PeternakAddProduct" />
-        <activity android:name=".PeternakEditProduct" />
-        <activity android:name=".PembeliDetailProduct" />
-        <activity android:name=".PembeliUploadBukti" />
-        <activity android:name=".PeternakDetailOrder"></activity>
+        <activity android:name=".Peternak.PeternakEditProduct" />
+        <activity android:name=".Pembeli.PembeliDetailProduct" />
+        <activity android:name=".Pembeli.PembeliUploadBukti" />
+        <activity android:name=".Peternak.PeternakDetailOrder"></activity>
     </application>
 
 </manifest>
