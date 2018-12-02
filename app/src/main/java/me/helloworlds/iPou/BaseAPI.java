@@ -45,4 +45,6 @@ public class BaseAPI {
     public static final String tampilDetailOrder = baseURL +"transaction.php?apicall=detail_order";
     public static final String verifOrder = baseURL + "transaction.php?apicall=verif_order";
     public static final String hapusOrder = baseURL + "transaction.php?apicall=delete_order";
+    public static final String tolakTransaksi = baseURL + "transaction.php?apicall=ket_tolak";
+    public static final String tolakInvestasi = baseURL + "invest.php?apicall=ket_tolak";
 }

@@ -51,8 +51,7 @@
     <RelativeLayout
         android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btnTolak"
@@ -73,5 +72,20 @@
             android:text="Verif"
             android:textColor="#fff" />
     </RelativeLayout>
+    <EditText
+        android:id="@+id/txtTolak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Keterangan"
+        android:visibility="gone"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/orange_button"
+        android:id="@+id/btnTolakk"
+        android:text="Kirim"
+        android:textColor="#fff"
+        android:fontFamily="@font/nunito_bold"
+        android:visibility="gone"/>
 
 </LinearLayout>

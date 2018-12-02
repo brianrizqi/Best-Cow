@@ -26,6 +26,7 @@ import java.util.Map;
 import me.helloworlds.iPou.Adapter.MitraStatusInvestAdapter;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
+import me.helloworlds.iPou.MitraKeteranganTolak;
 import me.helloworlds.iPou.Model.m_mitra_status_invest;
 import me.helloworlds.iPou.R;
 import me.helloworlds.iPou.TinyDB;
@@ -52,9 +53,21 @@ public class MitraStatusInvest extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m_mitra_status_invest m = list.get(position);
                 if (m.getImg().equalsIgnoreCase("belum")) {
-                    Intent i = new Intent(getApplicationContext(), MitraUploadBukti.class);
-                    i.putExtra("id_investasi", m.getId());
-                    startActivity(i);
+                    if (m.getVerif().equalsIgnoreCase("Ditolak")) {
+                        Intent intent = new Intent(getApplicationContext(), MitraKeteranganTolak.class);
+                        intent.putExtra("id_investasi", m.getId());
+                        startActivity(intent);
+                    } else {
+                        Intent i = new Intent(getApplicationContext(), MitraUploadBukti.class);
+                        i.putExtra("id_investasi", m.getId());
+                        startActivity(i);
+                    }
+                } else {
+                    if (m.getVerif().equalsIgnoreCase("Ditolak")) {
+                        Intent intent = new Intent(getApplicationContext(), MitraKeteranganTolak.class);
+                        intent.putExtra("id_investasi", m.getId());
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -74,15 +87,17 @@ public class MitraStatusInvest extends AppCompatActivity {
                                 m.setKandang(object.getString("id_kandang"));
                                 m.setId(object.getString("id_investasi"));
                                 m.setHarga(object.getString("jumlah_uang"));
-                                if (object.getString("img_pembayaran").equalsIgnoreCase("null")){
+                                if (object.getString("img_pembayaran").equalsIgnoreCase("null")) {
                                     m.setImg("Belum");
-                                } else{
+                                } else {
                                     m.setImg("Sudah");
                                 }
                                 if (object.getString("verif_investasi").equalsIgnoreCase("0")) {
                                     m.setVerif("Belum Verifikasi");
-                                } else {
+                                } else if (object.getString("verif_investasi").equalsIgnoreCase("1")) {
                                     m.setVerif("Verifikasi");
+                                } else {
+                                    m.setVerif("Ditolak");
                                 }
                                 list.add(m);
                             }

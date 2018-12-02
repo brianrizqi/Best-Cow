@@ -60,8 +60,6 @@ public class Peternak4Fragment extends Fragment {
                     Intent i = new Intent(getActivity(), PeternakDetailOrder.class);
                     i.putExtra("id_transaksi", m.getId());
                     startActivity(i);
-                } else {
-                    Toast.makeText(getActivity(), "Sudah Verifikasi", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -37,9 +37,9 @@ public class MitraDetailInvest extends AppCompatActivity {
 //    private String tampilJumlahUangUrl = BaseAPI.tampilJumlahUangURL;
     private int price, total, jumlah_uang;
     private double hargaMin, hargaMax, rasioMin, rasioMax;
-    private double modal = 36300;
-    private double labaMin = 16200;
-    private double labaMax = 26700;
+    private double modal = 41300;
+    private double labaMin = 11200;
+    private double labaMax = 21700;
     private TinyDB tinyDB;
 
     @Override
@@ -69,7 +69,7 @@ public class MitraDetailInvest extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (total > 5-(Integer.parseInt(uang)/18150000)) {
+                if (total > 5-(Integer.parseInt(uang)/20650000)) {
 
                 } else {
                     total++;

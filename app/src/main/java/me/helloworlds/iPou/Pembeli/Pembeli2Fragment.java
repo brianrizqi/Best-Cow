@@ -31,6 +31,7 @@ import me.helloworlds.iPou.Adapter.PembeliTransaksiAdapter;
 import me.helloworlds.iPou.AppController;
 import me.helloworlds.iPou.BaseAPI;
 import me.helloworlds.iPou.Model.m_pembeli_transaksi;
+import me.helloworlds.iPou.PembeliKeteranganTolak;
 import me.helloworlds.iPou.R;
 import me.helloworlds.iPou.TinyDB;
 
@@ -67,16 +68,23 @@ public class Pembeli2Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m_pembeli_transaksi m = list.get(position);
-                Intent i = new Intent(getActivity(), PembeliUploadBukti.class);
-                i.putExtra("id_transaksi", m.getId());
-                startActivity(i);
-            }
-        });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                return true;
+                if (m.getImg().equalsIgnoreCase("Belum Upload")) {
+                    if (m.getStatus().equalsIgnoreCase("Ditolak")) {
+                        Intent intent = new Intent(getActivity(), PembeliKeteranganTolak.class);
+                        intent.putExtra("id_transaksi", m.getId());
+                        startActivity(intent);
+                    } else {
+                        Intent i = new Intent(getActivity(), PembeliUploadBukti.class);
+                        i.putExtra("id_transaksi", m.getId());
+                        startActivity(i);
+                    }
+                } else {
+                    if (m.getStatus().equalsIgnoreCase("Ditolak")) {
+                        Intent intent = new Intent(getActivity(), PembeliKeteranganTolak.class);
+                        intent.putExtra("id_transaksi", m.getId());
+                        startActivity(intent);
+                    }
+                }
             }
         });
         return view;
@@ -98,9 +106,13 @@ public class Pembeli2Fragment extends Fragment {
                                 m.setJumlah("Jumlah : " + object.getString("jumlah"));
                                 m.setImg(BaseAPI.gambarURL + object.getString("gambar"));
                                 if (object.getString("verif").equalsIgnoreCase("0")) {
-                                    verif = "Belum Verifikasi";
+//                                    verif = "Belum Verifikasi";
+                                    m.setStatus("Belum Verifikasi");
+                                } else if (object.getString("verif").equalsIgnoreCase("1")) {
+//                                    verif = "Sudah Verifikasi";
+                                    m.setStatus("Sudah Verifikasi");
                                 } else {
-                                    verif = "Sudah Verifikasi";
+                                    m.setStatus("Ditolak");
                                 }
                                 if (object.getString("bukti").equalsIgnoreCase("null")) {
                                     bukti = "Belum Upload";
@@ -108,7 +120,6 @@ public class Pembeli2Fragment extends Fragment {
                                     bukti = "Sudah Upload";
                                 }
                                 m.setBukti(bukti);
-                                m.setStatus(verif);
                                 list.add(m);
                             }
                         } catch (JSONException e) {

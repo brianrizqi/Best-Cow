@@ -30,7 +30,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_roboto"
-            android:text="18150000"
+            android:text="20650000"
             android:textColor="#333"
             android:textSize="15dp" />
 

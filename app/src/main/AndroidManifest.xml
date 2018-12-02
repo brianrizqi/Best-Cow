@@ -45,7 +45,9 @@
         <activity android:name=".Peternak.PeternakEditProduct" />
         <activity android:name=".Pembeli.PembeliDetailProduct" />
         <activity android:name=".Pembeli.PembeliUploadBukti" />
-        <activity android:name=".Peternak.PeternakDetailOrder"></activity>
+        <activity android:name=".Peternak.PeternakDetailOrder" />
+        <activity android:name=".MitraKeteranganTolak" />
+        <activity android:name=".PembeliKeteranganTolak"></activity>
     </application>
 
 </manifest>

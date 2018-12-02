@@ -64,7 +64,6 @@ public class MitraEditProfile extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean error = jsonObject.getBoolean("error");
                             if (!error) {
-                                Toast.makeText(MitraEditProfile.this, jsonObject.getString("name"), Toast.LENGTH_SHORT).show();
                                 txtName.setText(jsonObject.getString("name"));
                                 txtEmail.setText(jsonObject.getString("email"));
                                 txtAlamat.setText(jsonObject.getString("alamat"));

@@ -27,8 +27,8 @@ import me.helloworlds.iPou.CustomNetworkImageView;
 import me.helloworlds.iPou.R;
 
 public class PeternakDetailOrder extends AppCompatActivity {
-    private TextView txtTotal, txtJumlah, txtPembeli;
-    private Button verif,tolak;
+    private TextView txtTotal, txtJumlah, txtPembeli,txtTolak;
+    private Button verif,tolak,tolakk;
     private CustomNetworkImageView imgBukti;
     private String idTransaksi,jumlah;
     private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
@@ -44,9 +44,18 @@ public class PeternakDetailOrder extends AppCompatActivity {
         imgBukti = (CustomNetworkImageView) findViewById(R.id.imgBukti);
         tolak = (Button) findViewById(R.id.btnTolak);
         verif = (Button) findViewById(R.id.btnVerif);
+        tolakk = (Button) findViewById(R.id.btnTolakk);
+        txtTolak = (TextView) findViewById(R.id.txtTolak);
         idTransaksi = getIntent().getStringExtra("id_transaksi");
         getDetail();
         tolak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tolakk.setVisibility(View.VISIBLE);
+                txtTolak.setVisibility(View.VISIBLE);
+            }
+        });
+        tolakk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tolak();
@@ -61,6 +70,7 @@ public class PeternakDetailOrder extends AppCompatActivity {
     }
 
     private void tolak() {
+        final String cek = txtTolak.getText().toString();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseAPI.hapusOrder,
                 new Response.Listener<String>() {
                     @Override
@@ -90,6 +100,7 @@ public class PeternakDetailOrder extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map <String,String> map = new HashMap<String, String>();
                 map.put("id_transaksi",idTransaksi);
+                map.put("ket",cek);
                 return map;
             }
         };
