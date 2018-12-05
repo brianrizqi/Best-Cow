@@ -68,11 +68,13 @@ public class Pembeli2Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m_pembeli_transaksi m = list.get(position);
-                if (m.getImg().equalsIgnoreCase("Belum Upload")) {
+                if (m.getBukti().equalsIgnoreCase("Belum Upload")) {
                     if (m.getStatus().equalsIgnoreCase("Ditolak")) {
                         Intent intent = new Intent(getActivity(), PembeliKeteranganTolak.class);
                         intent.putExtra("id_transaksi", m.getId());
                         startActivity(intent);
+                    } else if (m.getStatus().equalsIgnoreCase("Sudah Verifikasi")) {
+                        Toast.makeText(getActivity(), "Data telah diverifikasi", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent i = new Intent(getActivity(), PembeliUploadBukti.class);
                         i.putExtra("id_transaksi", m.getId());
@@ -83,6 +85,8 @@ public class Pembeli2Fragment extends Fragment {
                         Intent intent = new Intent(getActivity(), PembeliKeteranganTolak.class);
                         intent.putExtra("id_transaksi", m.getId());
                         startActivity(intent);
+                    } else if (m.getStatus().equalsIgnoreCase("Sudah Verifikasi")) {
+                        Toast.makeText(getActivity(), "Data telah diverifikasi", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -98,7 +102,6 @@ public class Pembeli2Fragment extends Fragment {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
-                            String verif, bukti;
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 final m_pembeli_transaksi m = new m_pembeli_transaksi();
                                 JSONObject object = jsonArray.getJSONObject(i);
@@ -106,20 +109,17 @@ public class Pembeli2Fragment extends Fragment {
                                 m.setJumlah("Jumlah : " + object.getString("jumlah"));
                                 m.setImg(BaseAPI.gambarURL + object.getString("gambar"));
                                 if (object.getString("verif").equalsIgnoreCase("0")) {
-//                                    verif = "Belum Verifikasi";
                                     m.setStatus("Belum Verifikasi");
                                 } else if (object.getString("verif").equalsIgnoreCase("1")) {
-//                                    verif = "Sudah Verifikasi";
                                     m.setStatus("Sudah Verifikasi");
                                 } else {
                                     m.setStatus("Ditolak");
                                 }
                                 if (object.getString("bukti").equalsIgnoreCase("null")) {
-                                    bukti = "Belum Upload";
+                                    m.setBukti("Belum Upload");
                                 } else {
-                                    bukti = "Sudah Upload";
+                                    m.setBukti("Sudah Upload");
                                 }
-                                m.setBukti(bukti);
                                 list.add(m);
                             }
                         } catch (JSONException e) {

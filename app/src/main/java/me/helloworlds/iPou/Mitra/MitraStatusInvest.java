@@ -52,11 +52,13 @@ public class MitraStatusInvest extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 m_mitra_status_invest m = list.get(position);
-                if (m.getImg().equalsIgnoreCase("belum")) {
+                if (m.getImg().equalsIgnoreCase("Belum")) {
                     if (m.getVerif().equalsIgnoreCase("Ditolak")) {
                         Intent intent = new Intent(getApplicationContext(), MitraKeteranganTolak.class);
                         intent.putExtra("id_investasi", m.getId());
                         startActivity(intent);
+                    } else if (m.getVerif().equalsIgnoreCase("Sudah Verifikasi")) {
+                        Toast.makeText(getApplicationContext(), "Data telah diverifikasi", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent i = new Intent(getApplicationContext(), MitraUploadBukti.class);
                         i.putExtra("id_investasi", m.getId());
@@ -67,6 +69,8 @@ public class MitraStatusInvest extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), MitraKeteranganTolak.class);
                         intent.putExtra("id_investasi", m.getId());
                         startActivity(intent);
+                    } else if (m.getVerif().equalsIgnoreCase("Sudah Verifikasi")) {
+                        Toast.makeText(getApplicationContext(), "Data telah diverifikasi", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
